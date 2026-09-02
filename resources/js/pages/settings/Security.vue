@@ -5,21 +5,10 @@ import InputError from '@/components/InputError.vue';
 import PasswordInput from '@/components/PasswordInput.vue';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-/* @chisel-passkeys */
-import type { Props as ManagePasskeysProps } from '@/components/ManagePasskeys.vue';
-import ManagePasskeys from '@/components/ManagePasskeys.vue';
-/* @end-chisel-passkeys */
-/* @chisel-2fa */
-import type { Props as ManageTwoFactorProps } from '@/components/ManageTwoFactor.vue';
-import ManageTwoFactor from '@/components/ManageTwoFactor.vue';
-import { edit } from '@/routes/security';
-import SecurityController from '@/actions/App/Http/Controllers/Settings/SecurityController';
-/* @end-chisel-2fa */
 
 type Props = {
     passwordRules: string;
-} /* @chisel-passkeys */ & ManagePasskeysProps /* @end-chisel-passkeys */ /* @chisel-2fa */ &
-    ManageTwoFactorProps /* @end-chisel-2fa */;
+};
 
 const props = defineProps<Props>();
 
@@ -109,19 +98,4 @@ defineOptions({
             </div>
         </Form>
     </div>
-
-    <!-- @chisel-2fa -->
-    <ManageTwoFactor
-        :canManageTwoFactor="canManageTwoFactor"
-        :requiresConfirmation="requiresConfirmation"
-        :twoFactorEnabled="twoFactorEnabled"
-    />
-    <!-- @end-chisel-2fa -->
-
-    <!-- @chisel-passkeys -->
-    <ManagePasskeys
-        :canManagePasskeys="canManagePasskeys"
-        :passkeys="passkeys"
-    />
-    <!-- @end-chisel-passkeys -->
 </template>

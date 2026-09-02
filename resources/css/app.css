@@ -17,9 +17,8 @@
 
 @theme inline {
     --font-sans:
-        'Public Sans', 'Helvetica Neue', Arial, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+        'Public Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-serif: Fraunces, 'Source Serif 4', Georgia, serif;
 
     /*
