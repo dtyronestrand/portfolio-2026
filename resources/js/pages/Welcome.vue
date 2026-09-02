@@ -451,7 +451,7 @@ import { home, work, resume, contact, skills } from '@/routes';
         transition:0.3s ease-in-out;
         transition-delay:0s;
         opacity:1;
-        @apply bg-primary;
+        @apply bg-(--primary);
         border-radius:10px;
         transform: scale(0.2);
         opacity:0;
@@ -461,7 +461,7 @@ import { home, work, resume, contact, skills } from '@/routes';
         text-align: center;
         position: relative;
         z-index:2;
-        @apply text-primary;
+        @apply text-(--primary);
         text-decoration: none;
         text-transform: uppercase;
         transition:0.3s ease-in-out;
@@ -485,7 +485,7 @@ import { home, work, resume, contact, skills } from '@/routes';
 .nav-7 .item:hover .linktext{
   transform:scale(1.2);
   -webkit-transform:scale(1.2);
-  @apply text-secondary;
+  @apply text-(--secondary);
 }
 .nav-7 .item:hover .linktext:before, .nav-7 .item:hover .linktext:after{
   opacity:1;
