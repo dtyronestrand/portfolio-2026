@@ -4,8 +4,7 @@
   target is self-hosted, so swap this @import for local @font-face rules with
   the SIL-licensed static/variable files when that migration happens.
 */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Public+Sans:wght@500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
@@ -17,9 +16,9 @@
 
 @theme inline {
     --font-sans:
-        'Public Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+        'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
         'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-serif: Fraunces, 'Source Serif 4', Georgia, serif;
+    --font-serif: 'Instrument Serif', 'Source Serif 4', Georgia, serif;
 
     /*
       Fixed, hierarchical radii per DESIGN.md `rounded` tokens (2px / 3px), not the
@@ -148,45 +147,45 @@
 }
 
 /*
-  Dark mode (default) — "Chalkboard & Feedback Red". Surface is slate, not navy;
-  the sole accent is the vermilion of a grading pen. See DESIGN.md > Colors.
-  All pairings below are the same values verified against WCAG AA when the
-  system was authored — see DESIGN.md's Components section for the pairs.
+  Dark mode (default) — "Dusk & Lamplight". Surface is a deep twilight
+  plum, not slate; the accent pair is a warm lamplight amber plus a cooler
+  dusk blue. See DESIGN.md > Colors. All pairings below are WCAG AA
+  contrast-checked — see DESIGN.md's Components section for the pairs.
 */
 .dark {
-    --background: #0d160f;
-    --foreground: #eae4d7;
-    --card: #19251c;
-    --card-foreground: #eae4d7;
-    --popover: #19251c;
-    --popover-foreground: #eae4d7;
-    --primary: #e16a60;
-    --primary-foreground: #0d160f;
-    --secondary: #19251c;
-    --secondary-foreground: #e16a60;
-    --muted: #19251c;
-    --muted-foreground: #8a968c;
-    --accent: #2e1011;
-    --accent-foreground: #e16a60;
-    --destructive: #de6a71;
-    --destructive-foreground: #0d160f;
-    --border: #2b362d;
-    --input: #2b362d;
-    --ring: #e16a60;
-    --chart-1: #e16a60;
-    --chart-2: #e1b75c;
-    --chart-3: #54a2cd;
-    --chart-4: #6baa6d;
-    --chart-5: #8a968c;
-    --sidebar-background: #19251c;
-    --sidebar-foreground: #eae4d7;
-    --sidebar-primary: #e16a60;
-    --sidebar-primary-foreground: #0d160f;
-    --sidebar-accent: #2e1011;
-    --sidebar-accent-foreground: #e16a60;
-    --sidebar-border: #2b362d;
-    --sidebar-ring: #e16a60;
-    --sidebar: #19251c;
+    --background: #220b2d;
+    --foreground: #96b0bb;
+    --card: #172622;
+    --card-foreground: #96b0bb;
+    --popover: #172622;
+    --popover-foreground: #96b0bb;
+    --primary: #e69500;
+    --primary-foreground: #220b2d;
+    --secondary: #145c9f;
+    --secondary-foreground: #e8ecee;
+    --muted: #172622;
+    --muted-foreground: #6f90ae;
+    --accent: #2b1f08;
+    --accent-foreground: #e69500;
+    --destructive: #e54d2e;
+    --destructive-foreground: #220b2d;
+    --border: #2a463f;
+    --input: #2a463f;
+    --ring: #e69500;
+    --chart-1: #e69500;
+    --chart-2: #145c9f;
+    --chart-3: #96b0bb;
+    --chart-4: #6f90ae;
+    --chart-5: #e54d2e;
+    --sidebar-background: #172622;
+    --sidebar-foreground: #96b0bb;
+    --sidebar-primary: #e69500;
+    --sidebar-primary-foreground: #220b2d;
+    --sidebar-accent: #2b1f08;
+    --sidebar-accent-foreground: #e69500;
+    --sidebar-border: #2a463f;
+    --sidebar-ring: #e69500;
+    --sidebar: #172622;
 }
 
 @layer base {

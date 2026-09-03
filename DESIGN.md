@@ -4,14 +4,16 @@ name: Marginalia
 description: Portfolio and resume site for an instructional designer — case studies of courses and eLearning built, credentials, and a downloadable resume, read by hiring managers and L&D directors.
 
 colors:
-  primary: "#E16A60"
-  secondary: "#8A968C"
-  neutral: "#19251C"
-  surface: "#0D160F"
-  on-surface: "#EAE4D7"
-  border: "#2B362D"
-  error: "#DE6A71"
-  subtle: "#2E1011"
+  primary: "#E69500"
+  accent-2: "#145C9F"
+  on-accent-2: "#E8ECEE"
+  secondary: "#6F90AE"
+  neutral: "#172622"
+  surface: "#220B2D"
+  on-surface: "#96B0BB"
+  border: "#2A463F"
+  error: "#E54D2E"
+  subtle: "#2B1F08"
 
 typography:
   display:
@@ -110,11 +112,11 @@ components:
     rounded: "{rounded.sm}"
     padding: "{spacing.md}"
   button-primary-hover:
-    backgroundColor: "#A83538"
-    textColor: "{colors.on-surface}"
+    backgroundColor: "#B87B0A"
+    textColor: "{colors.surface}"
   button-secondary:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.primary}"
+    backgroundColor: "{colors.accent-2}"
+    textColor: "{colors.on-accent-2}"
     typography: "{typography.label-caps}"
     rounded: "{rounded.sm}"
     padding: "{spacing.md}"
@@ -158,32 +160,34 @@ components:
 
 This is a working instructional designer's case-study archive, not a marketing site. The person reading it is a hiring manager or L&D director skimming a dozen portfolios in an afternoon; what earns a second minute is evidence of a real design process — the problem, the analysis, the storyboard, the outcome — written and shown plainly, without competing for attention against the site itself.
 
-The register is **Editorial Print**, sourced from two objects specific to teaching rather than to software: a **chalkboard** and a **grading pen**. The default surface is not a "dark UI" in the SaaS sense — it's slate, the color of a used chalkboard, with body copy set the color of chalk dust. The single accent, a vermilion red, is the color of the ink instructors have used for a century to mark up drafts: it is the *only* color that means "look here, this is interactive or this needs attention," on links, primary actions, and the one tag color. A secondary paper-and-graphite palette (documented below) is the site's light mode, used identically in structure but inverted in material — chalk becomes pencil, slate becomes manila.
+The register is **Editorial Print**, evoking a study desk after hours rather than a software product: a page lit by a warm desk lamp against a dark room. The default surface is not a "dark UI" in the SaaS sense — it's a deep twilight plum, with body copy set in a pale, cool slate-blue like moonlight on a page. Two accents carry the interactive layer: a warm lamplight amber for the primary action — links, buttons, the one tag color — and a cooler dusk blue reserved for a second, lower-emphasis class of action. Between them they mean "look here"; nothing else on the page does. A secondary paper-and-graphite palette (documented below) is the site's light mode, used identically in structure but inverted in material — lamplight becomes pencil, twilight becomes manila.
 
 What this gives up, deliberately: **warmth-by-default and density**. Nothing here tries to look like a product. There is no dashboard chrome, no icon-in-a-tinted-square feature grid, and no attempt to look "modern" in the SaaS sense — it looks like a well-kept teaching notebook, because the audience for an instructional designer's portfolio already trusts that register more than it trusts a trendy one.
 
 ## Colors
 
-Two colors carry the entire system, plus the neutrals needed to build a page out of them. Nothing is a stock semantic import — even the error state is drawn from the same red family as the accent, because in this domain a correction and a call to action are visually the same gesture: red ink in the margin.
+Two accent colors carry the interactive layer of the system, plus the neutrals needed to build a page out of them. Nothing is a stock semantic import — even the error state is drawn from the same warm family as Primary, because a correction and a call to action are visually related gestures here.
 
-- **Surface (#0D160F):** *Chalkboard slate.* The page background in the default (dark) mode. Deliberately green-grey, not navy or true black — an actual chalkboard is closer to slate than to ink. Nothing in this system is pure `#000000`.
-- **Neutral (#19251C):** *Chalk-worn patch.* One step lighter than Surface — the tonal shift a chalkboard shows where it's been erased and rewritten many times. This is the entire elevation model: cards, inputs, and secondary buttons sit on Neutral rather than Surface, and nothing floats above that with a shadow.
-- **On-surface (#EAE4D7):** *Chalk.* The primary text color — warm, dusty off-white, never pure white. This is what headlines and body copy are set in throughout the dark (default) mode.
-- **Border (#2B362D):** *Chalk rail.* The thin ledge at the bottom of a chalkboard, tonally between Neutral and readable text. Used exclusively as a 1px hairline to divide sections — never as a box outline around a whole container.
-- **Secondary (#8A968C):** *Eraser felt.* Muted grey-green for metadata: dates, durations, tool lists, byline text. It is legible but visibly recessive next to On-surface, which is the point — it should never compete with the writing.
-- **Primary (#E16A60):** *Feedback red.* The color of the pen an instructor uses to annotate a draft in the margin. This is the sole accent in the system: every link, the primary button, and the one tag color use it, and nothing else does. It carries roughly one job across the whole site — "this is actionable, follow it" — and that job would be diluted if it also decorated headings or backgrounds.
-- **Subtle (#2E1011):** *Red ink, dried.* A near-black wash of the accent, used only as the fill behind skill/tool tags so Primary-colored text has a quiet field to sit on without a second bright color entering the page.
-- **Error (#DE6A71):** *Overwritten in red, twice.* A lighter, slightly more saturated step of the same ramp as Primary — not a stock alert red — reserved for form-validation states on the one contact form the site has.
+- **Surface (#220B2D):** *Twilight.* The page background in the default (dark) mode. A deep, desaturated plum rather than navy or true black — dusk light through a window, not a screen. Nothing in this system is pure `#000000`.
+- **Neutral (#172622):** *Shadowed corner.* Tonally a hair's-breadth from Surface but a different hue family entirely — where Surface leans plum, Neutral leans a near-black teal, the way a room's shadowed corners read a different color than the light-struck wall. This is the entire elevation model: cards, inputs, and the muted background sit on Neutral rather than Surface, and nothing floats above that with a shadow.
+- **On-surface (#96B0BB):** *Moonlight.* The primary text color — a pale, cool slate-blue, never pure white. This is what headlines and body copy are set in throughout the dark (default) mode.
+- **Border (#2A463F):** *Room's edge.* A lightened step of Neutral, tonally between Neutral and readable text. Used exclusively as a 1px hairline to divide sections — never as a box outline around a whole container.
+- **Secondary (#6F90AE):** *Dusk haze.* A lightened, desaturated step of Accent-2's blue, used for metadata: dates, durations, tool lists, byline text. It is legible but visibly recessive next to On-surface, which is the point — it should never compete with the writing.
+- **Primary (#E69500):** *Lamplight.* The warm amber of a desk lamp. This is the system's dominant accent: every link, the primary button, and the one tag color use it, and nothing else does. It carries roughly one job across the whole site — "this is actionable, follow it" — and that job would be diluted if it also decorated headings or backgrounds.
+- **Accent-2 (#145C9F):** *Dusk blue.* A cooler, lower-emphasis second accent reserved for the secondary button and nothing else — it exists specifically so a screen can offer two actions of visibly different weight without leaning on tint or opacity tricks to do it.
+- **On-accent-2 (#E8ECEE):** *Lamp glass.* A near-white, faintly blue-tinted foreground used only as text on an Accent-2 fill, where On-surface itself doesn't clear contrast. Not used anywhere else — introducing it as a general text color would blur the one-job rule that keeps On-surface legible as *the* body color.
+- **Subtle (#2B1F08):** *Lamplight, dimmed.* A near-black wash of Primary, used only as the fill behind skill/tool tags so Primary-colored text has a quiet field to sit on without a second bright color entering the page.
+- **Error (#E54D2E):** *Struck through in red-orange.* A hotter, more saturated step off Primary's ramp — not a stock alert red — reserved for form-validation states on the one contact form the site has.
 
 **Light mode (secondary environment).** The site also ships a light theme — *notebook paper and pencil* — built as an independent design, not an inversion, per the usual rule that lightness cannot simply be flipped. Surface becomes a warm manila `#FAF4EB`, Neutral a deeper card stock `#F0E6DA`, Border `#D6CCC0`, On-surface a graphite ink `#221812`, Secondary a pencil grey `#645C53`. Primary darkens and gains chroma to `#A01E23` (red ink reads differently — and needs to be considerably darker — on cream paper than it does glowing against slate), and Error follows to `#860E2B`. Subtle becomes a pale wash `#FBD4CD`. Every pairing below was independently contrast-checked against this palette; none of it is a CSS filter over the dark tokens.
 
-All neutrals in both modes carry a small trace of hue (chroma 0.014–0.024, never R=G=B) — chalkboard green in dark mode, paper warmth in light. Ramps were built in OKLCH with chroma tapering toward the extremes and hue bending 5–10° across each ramp, so the greys read as material rather than as a spreadsheet.
+All neutrals in both modes carry a small trace of hue (chroma 0.014–0.024, never R=G=B) — plum-and-teal twilight in dark mode, paper warmth in light. Ramps were built in OKLCH with chroma tapering toward the extremes and hue bending 5–10° across each ramp, so the greys read as material rather than as a spreadsheet.
 
 ## Typography
 
 Two families, split by job, and one of them does double duty by design.
 
-**Fraunces** carries the entire editorial voice — display, headlines, and body copy alike — using its `opsz` axis to shift from a large, slightly loose display cut down to a tighter, more restrained text cut at 14–19px. This is a deliberate one-family decision: Fraunces has enough range (variable weight, optical size, and the `SOFT`/`WONK` axes) to carry a whole system, and using it for both display and reading text keeps the page reading as one written voice rather than a headline typeface glued onto a different body face. `WONK 1` is enabled only at display and headline-lg sizes — a slight, intentional irregularity in the letterforms that reads as *drawn*, echoing chalk-on-slate rather than a printed sans. Body sizes carry `'onum' 1` (oldstyle figures), which sit inside running prose the way a printed book's figures do, rather than the tabular, all-caps-height digits UI type normally uses. Fallback stack: `Fraunces, "Source Serif 4", Georgia, serif`. SIL Open Font License, self-hosted, Latin subset only.
+**Fraunces** carries the entire editorial voice — display, headlines, and body copy alike — using its `opsz` axis to shift from a large, slightly loose display cut down to a tighter, more restrained text cut at 14–19px. This is a deliberate one-family decision: Fraunces has enough range (variable weight, optical size, and the `SOFT`/`WONK` axes) to carry a whole system, and using it for both display and reading text keeps the page reading as one written voice rather than a headline typeface glued onto a different body face. `WONK 1` is enabled only at display and headline-lg sizes — a slight, intentional irregularity in the letterforms that reads as *drawn*, echoing pen-on-paper rather than a printed sans. Body sizes carry `'onum' 1` (oldstyle figures), which sit inside running prose the way a printed book's figures do, rather than the tabular, all-caps-height digits UI type normally uses. Fallback stack: `Fraunces, "Source Serif 4", Georgia, serif`. SIL Open Font License, self-hosted, Latin subset only.
 
 **Public Sans** carries the apparatus — navigation, buttons, tags, captions, form labels, metadata — at a single weight (500) throughout the whole system. Hierarchy inside the apparatus layer comes entirely from size, case, and tracking, never from a second or third weight; this is what keeps the sans reading as quiet infrastructure under Fraunces' voice rather than competing with it. Chosen over the more common choice of Inter specifically for Public Sans' institutional, wayfinding register — appropriate for a resume-adjacent site read by people at universities and corporate L&D departments. Fallback stack: `"Public Sans", "Helvetica Neue", Arial, sans-serif`. SIL Open Font License, self-hosted.
 
@@ -203,7 +207,7 @@ The system is flat. There are no drop shadows anywhere, including on the tooltip
 
 Depth is carried by two devices:
 
-1. **Tonal layering** — the Surface → Neutral step (chalkboard → chalk-worn patch). A card is a different patch of the same board, not an object floating above it.
+1. **Tonal layering** — the Surface → Neutral step (twilight → shadowed corner). A card is a different patch of the same room, not an object floating above it.
 2. **Hairline rules** — 1px in `border`, used only to divide, never to box in a whole container. A case-study section ends with a rule below it; it does not get a rule on all four sides.
 
 The one exception to "nothing floats" is the `tooltip` component, which intentionally uses `primary` as its fill rather than a neutral — it's modeled as a margin annotation, not a UI popover, and giving it the accent color rather than a grey is what sells that metaphor. It still carries no shadow; it's set apart by color alone, which is legitimate here because it never carries state (see Do's and Don'ts on color-alone signaling, which is about semantic state, not this decorative case).
@@ -216,7 +220,7 @@ Borders are 1px solid `border` at rest; on focus, inputs switch to a 2px `primar
 
 ## Components
 
-**Buttons.** Primary is a solid `primary` fill with `surface`-colored text (near-black ink on red — legible at 5.65:1, and a specific choice: white text on this red read too close to a generic "SaaS button" once tested). On hover the fill darkens toward `#A83538`, and text correspondingly flips to `on-surface` (chalk) rather than staying dark, since a darker fill needs a lighter foreground to hold contrast — this flip is an intentional detail, not a bug. Secondary is a `neutral` fill with `primary` text and no fill change on hover, just an underline; there is no tertiary or ghost button. If a screen wants a third action, it's given to the marginalia rail as a plain link instead.
+**Buttons.** Primary is a solid `primary` fill with `surface`-colored text (deep twilight ink on amber — legible at 7.5:1). On hover the fill darkens toward `#B87B0A`; text stays `surface`-colored rather than flipping, since the darkened fill holds contrast against it at every step of the ramp. Secondary is an `accent-2` fill with `on-accent-2` text and no fill change on hover, just an underline; there is no tertiary or ghost button. If a screen wants a third action, it's given to the marginalia rail as a plain link instead.
 
 **Chips (`chip-skill`).** Pill-shaped, `subtle` fill, `primary` text, always `label-caps`. Used only for tools and skills attached to a case study (e.g. "Storyline 360," "Needs Analysis," "UDL"). Never used as a generic status or category tag — if a non-skill tag is needed later, it should get its own component rather than borrowing this one's meaning.
 
@@ -230,8 +234,9 @@ Borders are 1px solid `border` at rest; on focus, inputs switch to a 2px `primar
 
 ## Do's and Don'ts
 
-- **Do** keep `primary` (#E16A60) to links, the primary button, hover/focus rings, and `chip-skill` text. If a fifth use case comes up, that's a sign the design needs a new decision, not a reason to reach for the accent again.
-- **Don't** introduce a second accent color for "variety." Case-study category badges, a second CTA, a highlight color for pull quotes — all of these should be solved with `on-surface`, weight, or the marginalia rail, not a new hue.
+- **Do** keep `primary` (#E69500) to links, the primary button, hover/focus rings, and `chip-skill` text. If a fifth use case comes up, that's a sign the design needs a new decision, not a reason to reach for the accent again.
+- **Do** keep `accent-2` (#145C9F) confined to the secondary button. It exists to give one specific component a lower-emphasis fill, not as a general-purpose second hue.
+- **Don't** introduce a third accent color for "variety." Case-study category badges, a second CTA, a highlight color for pull quotes — all of these should be solved with `on-surface`, weight, or the marginalia rail, not a new hue.
 - **Don't** add a shadow anywhere, including on the tooltip or any dropdown. If something needs to look raised, use the Surface → Neutral step; if that's not visible enough, the fix is more space around it, not a shadow.
 - **Do** set all body prose in Fraunces at `opsz` tuned for its size — never substitute Public Sans into a paragraph of case-study narrative. The apparatus face is for labels and metadata only.
 - **Don't** add a third font weight to either family. Fraunces stays at 400/600, Public Sans stays at 500. A heading that isn't reading as a heading needs more size or space above it, not more weight.
