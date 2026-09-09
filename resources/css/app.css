@@ -1,10 +1,8 @@
 /*
-  Fraunces (voice — display, headline, body) and Public Sans (apparatus — labels,
-  buttons, metadata) per DESIGN.md. Loaded here as a bridge; DESIGN.md's stated
-  target is self-hosted, so swap this @import for local @font-face rules with
-  the SIL-licensed static/variable files when that migration happens.
+  Source Serif 4 (headlines), Hanken Grotesk (body/UI), and JetBrains Mono
+  (data/labels) per DESIGN.md's "Academic Creative Modern" system.
 */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
@@ -16,20 +14,23 @@
 
 @theme inline {
     --font-sans:
-        'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
-        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-serif: 'Instrument Serif', 'Source Serif 4', Georgia, serif;
+        'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-mono:
+        'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
     /*
-      Fixed, hierarchical radii per DESIGN.md `rounded` tokens (2px / 3px), not the
-      stock proportional lg/md/sm-from-one-base scale — this system's whole point is
-      that inputs and buttons are barely rounded (2px) and cards one notch softer
-      (3px). Nothing scales up from here; `rounded-full` (Tailwind's own utility)
-      covers the pill chips.
+      Radii per DESIGN.md `rounded` tokens — a 0.25rem functional default
+      (inputs, small buttons), stepping up to 0.5rem for cards and featured
+      imagery. Rectangular-with-soft-corners throughout; `rounded-full`
+      (Tailwind's own utility) still covers the pill chips.
     */
-    --radius-lg: 3px;
-    --radius-md: 2px;
-    --radius-sm: 2px;
+    --radius-xl: 0.75rem;
+    --radius-lg: 0.5rem;
+    --radius-md: 0.375rem;
+    --radius-sm: 0.125rem;
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -97,95 +98,90 @@
     body,
     html {
         --font-sans:
-            'Public Sans', 'Helvetica Neue', Arial, sans-serif,
+            'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif,
             'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
             'Noto Color Emoji';
     }
 }
 
 /*
-  Light mode — "Notebook & Pencil": manila paper and graphite ink. This is the
-  secondary environment; see DESIGN.md > Colors > "Light mode (secondary
-  environment)". Independently derived and contrast-checked, not a filter over
-  the dark tokens.
+  "Academic Creative Modern" — a single immersive dark environment (see
+  DESIGN.md > Colors); there is no separate light palette in this system, so
+  these tokens are the default in :root and repeated under .dark so the
+  existing appearance toggle keeps working without changing how the site
+  looks.
 */
 :root {
-    --background: #faf4eb;
-    --foreground: #221812;
-    --card: #f0e6da;
-    --card-foreground: #221812;
-    --popover: #f0e6da;
-    --popover-foreground: #221812;
-    --primary: #a01e23;
-    --primary-foreground: #faf4eb;
-    --secondary: #f0e6da;
-    --secondary-foreground: #a01e23;
-    --muted: #f0e6da;
-    --muted-foreground: #645c53;
-    --accent: #fbd4cd;
-    --accent-foreground: #a01e23;
-    --destructive: #860e2b;
-    --destructive-foreground: #faf4eb;
-    --border: #d6ccc0;
-    --input: #d6ccc0;
-    --ring: #a01e23;
-    --chart-1: #a01e23;
-    --chart-2: #a27000;
-    --chart-3: #246099;
-    --chart-4: #1d6835;
-    --chart-5: #645c53;
-    --radius: 3px;
-    --sidebar-background: #f0e6da;
-    --sidebar-foreground: #221812;
-    --sidebar-primary: #a01e23;
-    --sidebar-primary-foreground: #faf4eb;
-    --sidebar-accent: #fbd4cd;
-    --sidebar-accent-foreground: #a01e23;
-    --sidebar-border: #d6ccc0;
-    --sidebar-ring: #a01e23;
-    --sidebar: #f0e6da;
+    --background: #0b1326;
+    --foreground: #dae2fd;
+    --card: #171f33;
+    --card-foreground: #dae2fd;
+    --popover: #222a3d;
+    --popover-foreground: #dae2fd;
+    --primary: #c3c0ff;
+    --primary-foreground: #1d00a5;
+    --secondary: #6bd8cb;
+    --secondary-foreground: #003732;
+    --muted: #131b2e;
+    --muted-foreground: #c7c4d8;
+    --accent: #222a3d;
+    --accent-foreground: #dae2fd;
+    --destructive: #93000a;
+    --destructive-foreground: #ffdad6;
+    --border: #464555;
+    --input: #464555;
+    --ring: #c3c0ff;
+    --chart-1: #c3c0ff;
+    --chart-2: #6bd8cb;
+    --chart-3: #ffb2b7;
+    --chart-4: #4f46e5;
+    --chart-5: #29a195;
+    --radius: 0.25rem;
+    --sidebar-background: #131b2e;
+    --sidebar-foreground: #dae2fd;
+    --sidebar-primary: #c3c0ff;
+    --sidebar-primary-foreground: #1d00a5;
+    --sidebar-accent: #222a3d;
+    --sidebar-accent-foreground: #dae2fd;
+    --sidebar-border: #464555;
+    --sidebar-ring: #c3c0ff;
+    --sidebar: #131b2e;
 }
 
-/*
-  Dark mode (default) — "Dusk & Lamplight". Surface is a deep twilight
-  plum, not slate; the accent pair is a warm lamplight amber plus a cooler
-  dusk blue. See DESIGN.md > Colors. All pairings below are WCAG AA
-  contrast-checked — see DESIGN.md's Components section for the pairs.
-*/
 .dark {
-    --background: #220b2d;
-    --foreground: #96b0bb;
-    --card: #172622;
-    --card-foreground: #96b0bb;
-    --popover: #172622;
-    --popover-foreground: #96b0bb;
-    --primary: #e69500;
-    --primary-foreground: #220b2d;
-    --secondary: #145c9f;
-    --secondary-foreground: #e8ecee;
-    --muted: #172622;
-    --muted-foreground: #6f90ae;
-    --accent: #2b1f08;
-    --accent-foreground: #e69500;
-    --destructive: #e54d2e;
-    --destructive-foreground: #220b2d;
-    --border: #2a463f;
-    --input: #2a463f;
-    --ring: #e69500;
-    --chart-1: #e69500;
-    --chart-2: #145c9f;
-    --chart-3: #96b0bb;
-    --chart-4: #6f90ae;
-    --chart-5: #e54d2e;
-    --sidebar-background: #172622;
-    --sidebar-foreground: #96b0bb;
-    --sidebar-primary: #e69500;
-    --sidebar-primary-foreground: #220b2d;
-    --sidebar-accent: #2b1f08;
-    --sidebar-accent-foreground: #e69500;
-    --sidebar-border: #2a463f;
-    --sidebar-ring: #e69500;
-    --sidebar: #172622;
+    --background: #0b1326;
+    --foreground: #dae2fd;
+    --card: #171f33;
+    --card-foreground: #dae2fd;
+    --popover: #222a3d;
+    --popover-foreground: #dae2fd;
+    --primary: #c3c0ff;
+    --primary-foreground: #1d00a5;
+    --secondary: #6bd8cb;
+    --secondary-foreground: #003732;
+    --muted: #131b2e;
+    --muted-foreground: #c7c4d8;
+    --accent: #222a3d;
+    --accent-foreground: #dae2fd;
+    --destructive: #93000a;
+    --destructive-foreground: #ffdad6;
+    --border: #464555;
+    --input: #464555;
+    --ring: #c3c0ff;
+    --chart-1: #c3c0ff;
+    --chart-2: #6bd8cb;
+    --chart-3: #ffb2b7;
+    --chart-4: #4f46e5;
+    --chart-5: #29a195;
+    --sidebar-background: #131b2e;
+    --sidebar-foreground: #dae2fd;
+    --sidebar-primary: #c3c0ff;
+    --sidebar-primary-foreground: #1d00a5;
+    --sidebar-accent: #222a3d;
+    --sidebar-accent-foreground: #dae2fd;
+    --sidebar-border: #464555;
+    --sidebar-ring: #c3c0ff;
+    --sidebar: #131b2e;
 }
 
 @layer base {

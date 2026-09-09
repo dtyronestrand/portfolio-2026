@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'Welcome')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/work', [ProjectController::class, 'index'])->name('work');
 Route::get('/resume', [ResumeController::class, 'index'])->name('resume');
 Route::get('/skills', [SkillController::class, 'index'])->name('skills');
@@ -16,4 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
 });
 
+Route::prefix('admin')->middleware('auth')->group(function() {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});
 require __DIR__.'/settings.php';

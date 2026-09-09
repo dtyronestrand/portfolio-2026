@@ -13,7 +13,7 @@ class ProjectController extends Controller
     public function index()
     {
      $work = Project::all();
-     return Inertia::render('Work', [
+     return Inertia::render('work/Index', [
         'work' => $work
      ]);
     }
