@@ -18,7 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
 });
 
-Route::prefix('admin')->middleware('auth')->group(function() {
+Route::prefix('admin')->group(function() {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 require __DIR__.'/settings.php';
