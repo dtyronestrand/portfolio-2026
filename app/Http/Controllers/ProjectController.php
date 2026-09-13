@@ -17,7 +17,12 @@ class ProjectController extends Controller
         'work' => $work
      ]);
     }
-
+    public function admin()
+    {
+        return Inertia::render('admin/Work', [
+            'work' => Project::all()
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

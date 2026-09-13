@@ -1,17 +1,20 @@
 <template>
-    <header class="sticky top-0 z-5 flex items-center gap-[16px] p-[14px 32px] border-b border-b-(--outline-variant) bg-(--glass-tint) backdrop-blur-[12px]">
-        <div class="flex-1 max-w-[360px] min-w-0">
+  
+        <section data-screen-label="Dashboard" class="flex flex-col gap-[28px]">
+            <div class="flex flex-wrap items-end gap-[16px]">
+                <div class="flex-1 min-w-[260px]">
+                    <h1></h1>
+                </div>
+                <Button>New Work Product</Button>
+            </div>
             
-        </div>
-    </header>
-        <div>
+        </section>
             
-        </div>
- 
+     
 </template>
 
 <script setup lang="ts">
-
+import Button from '@/components/ui/button/Button.vue';
 </script>
 
 <style scoped>

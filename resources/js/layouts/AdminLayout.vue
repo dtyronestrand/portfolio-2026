@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-cols-[236px_minmax(0,1fr)] min-height-[100vh] bg-background">
-        <aside class="sticky top-0 self-start h-screen flex flex-col gap-[20px] p-[24px 14px]border-r border-r-(--outline-variant) bg-[var(--surface-container-lowest)] box-border">
+        <aside class="sticky top-0 self-start h-screen flex flex-col gap-[20px] p-[24px 14px] border-r border-r-(--outline-variant) bg-[var(--surface-container-lowest)] box-border">
             <div class="p-[0 10] flex flex-col gap-[4px]">
                 <span class="text-[21px] font-weight-700 tracking-[0.2em] text-sidebar-foreground">Strand&#8202;/&#8202;ID</span>
                 <span class="ds-label-sm text-xs text-muted">Portfolio Admin</span>
@@ -35,15 +35,29 @@
                 </div>
             </div>
         </aside>
-<slot></slot>
+        <main class="min-w-0 flex flex-col">
+  <header class="sticky top-0 z-5 flex items-center gap-[16px] p-[14px 32px] border-b border-b-(--outline-variant) bg-(--glass-tint) backdrop-blur-[12px]">
+        <div class="flex-1 max-w-[360px] min-w-0">
+            <Input placeholder="Search skills, work, resume" hint-size="100%, 40px"/>
+        </div>
+        <span class="ds-label-sm ml-auto text-xs text-(--text-faint)">Autosaved</span>
+        <Button variant="secondary" size="sm">Publish Changes</Button>
+    </header>
+    <div class="p-[32px] flex flex-col gap-[28px] max-w-[1280px] box-border">
+
+        <slot></slot>
+    </div>
+        </main>
     </div>
 </template>
 
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { LayoutDashboard } from '@lucide/vue';
+import { LayoutDashboard, FolderKanban } from '@lucide/vue';
 import type { LucideIcon } from '@lucide/vue';
-import { dashboard as adminDashboard } from '@/routes/admin';
+import Button from '@/components/ui/button/Button.vue';
+import Input from '@/components/ui/input/Input.vue';
+import { dashboard as adminDashboard, work } from '@/routes/admin';
 
 interface NavItem {
     label: string;
@@ -54,6 +68,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { label: 'Dashboard', icon: LayoutDashboard, href: adminDashboard().url },
+    { label: 'Work Products', icon: FolderKanban, href: work().url },
 ];
 
 const page = usePage();

@@ -19,6 +19,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::prefix('admin')->group(function() {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+   
+Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/work', [ProjectController::class, 'admin'])->name('admin.work');
 });
 require __DIR__.'/settings.php';
