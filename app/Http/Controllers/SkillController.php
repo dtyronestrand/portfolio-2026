@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SkillCategory;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SkillController extends Controller
 {
@@ -14,7 +16,25 @@ class SkillController extends Controller
     {
         //
     }
-
+    public function admin()
+    {
+       $categories = SkillCategory::all()->load('skills')->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'skills' => $category->skills->map(function ($skill) {
+                    return [
+                        'id' => $skill->id,
+                        'name' => $skill->name,
+                        'proficiency' => $skill->proficiency,
+                    ];
+                }),
+            ];
+        });
+        return Inertia::render('admin/Skills', [
+           'categories' => $categories
+        ]); 
+    }
     /**
      * Show the form for creating a new resource.
      */

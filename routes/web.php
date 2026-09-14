@@ -22,5 +22,6 @@ Route::prefix('admin')->group(function() {
    
 Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('/work', [ProjectController::class, 'admin'])->name('admin.work');
+Route::get('/skills', [SkillController::class, 'admin'])->name('admin.skills');
 });
 require __DIR__.'/settings.php';
