@@ -1,13 +1,14 @@
 <template>
-    <Form :action="store()" class="flex-[1 1 300px] min-w-0 max-w-[360px] p-[24px] border border(--border-card) rounded-[8px] bg-(--surface-container-low) flex flex-col gap-[20px]">
+    <Form #default="{processing, wasSuccessful}" @finish="handleFinish" :action="store()" resetOnSuccess class="flex-[1 1 300px] min-w-0 max-w-[360px] p-[24px] border border(--border-card) rounded-[8px] bg-(--surface-container-low) flex flex-col gap-[20px]">
         <div class="flex flex-col gap-[4px]">
             <span class="ds-label-sm text-xs">New Skill</span>
+          
             <h2 class="ds-headline-md m-0 text-xl leading-[26px]">Add New Skill</h2>
         </div>
         <label for="skillName">Skill Name</label>
-        <Input v-model="newSkill.name" name="skillName" label="Skill Name" placeholder="Enter skill name" />
+        <Input v-model="newSkill.name" name="name" label="Skill Name" placeholder="Enter skill name" />
         <label for="category">Category</label>
-        <Select name="category" v-model="newSkill.categoryId">
+        <Select name="skill_category_id" v-model="newSkill.categoryId">
             <SelectTrigger>
                 <SelectValue placeholder="Select a category"/>
             </SelectTrigger>
@@ -25,7 +26,7 @@
            
             <label for="proficiency">Proficiency</label>
 
-            <Select v-model="newSkill.proficiency">
+            <Select name="level" v-model="newSkill.proficiency">
                 <SelectTrigger>
 
                     <SelectValue placeholder="Select Proficiency" />
@@ -41,7 +42,9 @@
                 </SelectContent>
             </Select>
         </div>
-        <Button type="submit" class="w-full">Add Skill</Button>
+        <Button type="button" @click="handleCancel" class="w-full">Cancel</Button>
+        <Button type="submit" :disabled="processing" class="w-full">{{processing ? 'Adding...' : 'Add Skill'}}</Button>
+     <div v-if="wasSuccessful">Skill added successfully!</div>
     </Form>
 
     
@@ -71,6 +74,15 @@ const newSkill = ref({
     categoryId: null,
     proficiency: null,
 });
+const emit = defineEmits(['skillAdded', 'cancel']);
+
+const handleFinish = () => {
+    emit('skillAdded');
+};
+
+const handleCancel = () => {
+    emit('cancel');
+};
 </script>
 
 <style scoped>

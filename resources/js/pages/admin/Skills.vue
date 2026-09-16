@@ -12,7 +12,7 @@
             </div>
             <Button @click="showAddSkillForm = true">Add Skill</Button>
         </div>
-        <AddSkillForm v-if="showAddSkillForm" :categories="props.categories" />
+        <AddSkillForm v-if="showAddSkillForm" :categories="props.categories" @skillAdded="handleSkillAdded" />
         <div v-else class="flex flex-wrap items-start gap-[20px]">
             <div
                 class="flex-[1 1 420px] min-w-0 overflow-hidden rounded-[8px] border border-(--border-card) bg-(--surface-container)"
@@ -68,6 +68,9 @@ interface Props {
 
 const props = defineProps<Props>();
 const showAddSkillForm = ref(false);
+const handleSkillAdded = () => {
+    showAddSkillForm.value = false;
+};
 </script>
 
 <style scoped></style>

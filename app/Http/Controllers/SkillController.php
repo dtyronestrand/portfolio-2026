@@ -54,7 +54,7 @@ class SkillController extends Controller
             'skill_category_id' => 'required|exists:skill_categories,id',
         ]);
         Skill::create($skill);
-        return back()->with('success', 'Skill created successfully.');
+        return redirect()->route('admin.skills')->with('success', 'Skill created successfully.');
     }
 
     /**
