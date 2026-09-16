@@ -48,7 +48,13 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $skill = $request->validate([
+            'name' => 'required|string|max:255',
+            'level' => 'required|integer|min:1|max:100',
+            'skill_category_id' => 'required|exists:skill_categories,id',
+        ]);
+        Skill::create($skill);
+        return back()->with('success', 'Skill created successfully.');
     }
 
     /**
