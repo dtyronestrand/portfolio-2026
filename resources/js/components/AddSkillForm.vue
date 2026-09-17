@@ -42,8 +42,11 @@
                 </SelectContent>
             </Select>
         </div>
-        <Button type="button" @click="handleCancel" class="w-full">Cancel</Button>
-        <Button type="submit" :disabled="processing" class="w-full">{{processing ? 'Adding...' : 'Add Skill'}}</Button>
+        <div class="flex flex-row gap-[8px] w-full min-w-0">
+
+            <Button size="sm" type="button" @click="handleCancel" class="flex-1 min-w-0" variant="destructive">Cancel</Button>
+            <Button size="sm" type="submit" :disabled="processing" class="flex-1 min-w-0">{{processing ? 'Adding...' : 'Add Skill'}}</Button>
+        </div>
      <div v-if="wasSuccessful">Skill added successfully!</div>
     </Form>
 
