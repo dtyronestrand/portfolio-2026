@@ -19,7 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::prefix('admin')->group(function() {
-   
+Route::redirect('/', '/dashboard', 301);
 Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('/work', [ProjectController::class, 'admin'])->name('admin.work');
 Route::get('/skills', [SkillController::class, 'admin'])->name('admin.skills');
