@@ -16,28 +16,28 @@
 
                 <SelectGroup>
                     <SelectLabel>Categories</SelectLabel>
-                    <SelectItem v-for="category in props.categories" :key="category.id" :value="category.id">
-                        {{ category.name }}
+                    <SelectItem v-for="(category, index) in props.categories" :key="index" :value="category.id">
+                        {{ category }}
                     </SelectItem>
                 </SelectGroup>
             </SelectContent>
         </Select>
         <div class="flex flex-col gap-[10px]">
            
-            <label for="proficiency">Proficiency</label>
+            <label for="level">Level</label>
 
-            <Select name="level" v-model="newSkill.proficiency">
+            <Select name="level" v-model="newSkill.level">
                 <SelectTrigger>
 
-                    <SelectValue placeholder="Select Proficiency" />
+                    <SelectValue placeholder="Select Level" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
-                        <SelectLabel>Proficiency</SelectLabel>
-                        <SelectItem value="25">Novice</SelectItem>
-                        <SelectItem value="50">Intermediate</SelectItem>
-                        <SelectItem value="75">Advanced</SelectItem>
-                        <SelectItem value="100">Expert</SelectItem>
+                        <SelectLabel>Level</SelectLabel>
+                        <SelectItem value="1">Beginner</SelectItem>
+                        <SelectItem value="2">Intermediate</SelectItem>
+                        <SelectItem value="3">Advanced</SelectItem>
+                        <SelectItem value="4">Expert</SelectItem>
                     </SelectGroup>
                 </SelectContent>
             </Select>
@@ -64,18 +64,13 @@ interface Props {
     categories: {
         id: number;
         name: string;
-        skills: {
-            id: number;
-            name: string;
-            proficiency: number;
-        }[];
     }[];
 }
 const props = defineProps<Props>();
 const newSkill = ref({
     name: '',
     categoryId: null,
-    proficiency: null,
+    level: null,
 });
 const emit = defineEmits(['skillAdded', 'cancel']);
 

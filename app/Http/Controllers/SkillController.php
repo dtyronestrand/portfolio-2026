@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\SkillCategory;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Enum;
 use Inertia\Inertia;
+use App\Enums\SkillLevel;
 
 class SkillController extends Controller
 {
@@ -26,7 +28,7 @@ class SkillController extends Controller
                     return [
                         'id' => $skill->id,
                         'name' => $skill->name,
-                        'proficiency' => $skill->proficiency,
+                        'level' => $skill->level,
                     ];
                 }),
             ];
@@ -50,7 +52,7 @@ class SkillController extends Controller
     {
         $skill = $request->validate([
             'name' => 'required|string|max:255',
-            'level' => 'required|integer|min:1|max:100',
+            'level' => ['required', new Enum(SkillLevel::class)],
             'skill_category_id' => 'required|exists:skill_categories,id',
         ]);
         Skill::create($skill);

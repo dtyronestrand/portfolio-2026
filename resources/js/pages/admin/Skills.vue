@@ -12,7 +12,7 @@
             </div>
             <Button @click="showAddSkillForm = true">Add Skill</Button>
         </div>
-        <AddSkillForm v-if="showAddSkillForm" :categories="props.categories" @skillAdded="handleSkillAdded" @cancel="showAddSkillForm = false" />
+        <AddSkillForm v-if="showAddSkillForm" :categories="categoryNames" @skillAdded="handleSkillAdded" @cancel="showAddSkillForm = false" />
         <div v-else class="flex flex-wrap items-start gap-[20px]">
             <div
                 class="flex-[1 1 420px] min-w-0 overflow-hidden rounded-[8px] border border-(--border-card) bg-(--surface-container)"
@@ -25,19 +25,22 @@
                 :key="category.id"
                 :title="category.name"
                 >
-                <div class="flex flex-col gap-[12px] p-[16px]">
+                <div class="grid grid-cols-[max-content_1fr] gap-x-8 gap-y-3 p-4">
                     <div
                     v-for="skill in category.skills"
                     :key="skill.id"
-                    class="flex items-center justify-between gap-[12px]"
+                    class="col-span-2 grid grid-cols-subgrid items-center"
                         >
-                        <span class="text-md text-(--text-primary)">{{
-                            skill.name
-                        }}</span>
-                                <span class="text-sm text-(--text-muted)"
-                                >{{ skill.proficiency }}%</span
-                                >
+                        <div>
+
+                            <span class="text-md text-(--text-primary)">{{
+                                skill.name
+                            }}</span>
                             </div>
+                        <div class="self-end">
+                            <SkillLevelSteps :level="skill.level" variant="track" :showLabel=true :showCount=false></SkillLevelSteps>
+                        </div>    
+                        </div>
                         </div>
                     </Tab>
                 </Tabs>
@@ -49,8 +52,9 @@
 
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import AddSkillForm from '@/components/AddSkillForm.vue';
+import SkillLevelSteps from '@/components/SkillLevelSteps.vue';
 import Tab from '@/components/Tab.vue';
 import Tabs from '@/components/Tabs.vue';
 import Button from '@/components/ui/button/Button.vue';
@@ -61,7 +65,7 @@ interface Props {
         skills: {
             id: number;
             name: string;
-            proficiency: number;
+            level: number;
         }[];
     }[];
 }
@@ -71,6 +75,7 @@ const showAddSkillForm = ref(false);
 const handleSkillAdded = () => {
     showAddSkillForm.value = false;
 };
+const categoryNames = computed(() => props.categories.map((category) => ({ id: category.id, name: category.name })));
 </script>
 
 <style scoped></style>

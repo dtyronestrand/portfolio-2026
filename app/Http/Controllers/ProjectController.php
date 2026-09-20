@@ -14,13 +14,13 @@ class ProjectController extends Controller
     {
      $work = Project::all();
      return Inertia::render('work/Index', [
-        'work' => $work
+        'projects' => $work
      ]);
     }
     public function admin()
     {
         return Inertia::render('admin/Work', [
-            'work' => Project::all()
+            'projects' => Project::all()
         ]);
     }
     /**
@@ -36,7 +36,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**

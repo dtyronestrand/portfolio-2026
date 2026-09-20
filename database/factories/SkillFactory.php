@@ -25,7 +25,7 @@ class SkillFactory extends Factory
                 'Kubernetes', 'AWS', 'Git', 'Tailwind CSS', 'REST APIs', 'GraphQL',
                 'CI/CD', 'Linux', 'Bash', 'Jest', 'PHPUnit', 'Figma',
             ]),
-            'level' => fake()->numberBetween(1, 100),
+            'level' => fake()->numberBetween(1, 4),
             'skill_category_id' => SkillCategory::factory(),
         ];
     }
