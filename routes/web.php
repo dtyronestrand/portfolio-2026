@@ -28,7 +28,6 @@ Route::post('/skills', [SkillController::class, 'store'])->name('admin.skills.st
 Route::post('/work', [ProjectController::class, 'store'])->name('admin.projects.store');
 });
 
-Route::post('/media', [MediaController::class, 'store'])->name('media.store');
-Route::delete('/media/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
+
 require __DIR__.'/settings.php';
     

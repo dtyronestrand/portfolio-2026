@@ -36,7 +36,26 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-       
+       $request->validate([
+        'name' => 'required|string|max:255',
+        'problem' => 'required|string',
+        'product' => 'required|string',
+        'hero' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'tags' => 'nullable|array',
+        'attachments' => 'nullable|array',
+       ]);
+
+       $project = Project::create($request->only(['name', 'problem', 'product']));
+
+        if ($request->hasFile('hero')) {
+            $project->addMediaFromRequest('hero')->toMediaCollection('hero');
+        }
+
+        if ($request->has('tags')) {
+            $project->tags()->sync($request->input('tags'));
+        }
+
+        return redirect()->route('admin.work')->with('success', 'Project created successfully.');
     }
 
     /**
