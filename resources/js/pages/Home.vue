@@ -48,7 +48,7 @@ const props = defineProps<Props>();
         >
             <div class="drift text-uppercase p-[11px 0] flex w-[200%]">
                 <div class="flex w-[50%] flex-none gap-[40px] pr-[40px]">
-                    <span v-for="skill in props.skills">
+                    <span v-for="skill in props.skills" :key="skill">
                         <span>{{ skill }}</span>
                         <span class="text-secondary"> &x25C6</span>
                     </span>
