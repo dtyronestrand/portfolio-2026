@@ -13,6 +13,7 @@ createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     withApp(app) {
         app.use(PrimeVue, {
+            inputVariant: 'filled',
          unstyled: true,
          pt: {
             textarea: {

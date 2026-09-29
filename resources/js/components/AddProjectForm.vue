@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="handleSubmit" class="flex-[1_1_300px] min-w-0 max-w-[720px] p-6 border border-(--border-card) rounded-lg bg-(--surface-container-low) flex flex-col gap-6">
+    <form @submit.prevent="handleSubmit" class="flex-[1_1_300px] min-w-0 max-w-180 p-6 border border-(--border-card) rounded-lg bg-(--surface-container-low) flex flex-col gap-6">
         <div class="flex flex-col gap-1">
             <span class="text-xs text-(--text-muted) tracking-wider uppercase">New Project</span>
             <h2 class="text-xl font-semibold m-0 text-(--text-display)">Add Project</h2>
@@ -53,10 +53,10 @@
                     <div v-if="files.length" class="flex flex-col gap-2">
                         <div v-for="(file, index) of files" :key="file.name + file.size" class="flex items-center justify-between p-3 rounded-lg bg-(--surface-container)">
                             <div class="flex items-center gap-3">
-                                <CloudUpload class="text-(--primary) shrink-0"/>
+                                <CloudUpload class="text-primary shrink-0"/>
                                 <div class="flex flex-col">
                                     <span class="text-sm font-medium">{{ file.name }}</span>
-                                    <span class="text-sm text-(--text-muted)">{{ formatSize(file) }}</span>
+                                    <span class="text-sm text-(--text-muted)">{{ formatSize(file.size) }}</span>
                                 </div>
                             </div>
                             <Button type="button" iconOnly variant="text" severity="secondary" size="small" rounded @click="removeFileCallback(index)"><Times/></Button>
