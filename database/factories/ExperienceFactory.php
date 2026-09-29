@@ -23,7 +23,7 @@ class ExperienceFactory extends Factory
         return [
             'title' => fake()->jobTitle(),
             'company' => fake()->company(),
-            'location' => fake()->city().', '.fake()->stateAbbr(),
+            'location' => fake()->city().', '.fake()->country(),
             'start_date' => $startDate,
             'end_date' => fake()->optional(0.7)->dateTimeBetween($startDate, 'now'),
             'description' => fake()->paragraph(3),

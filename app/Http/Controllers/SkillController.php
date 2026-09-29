@@ -21,11 +21,11 @@ class SkillController extends Controller
 
     public function admin()
     {
-        $categories = SkillCategory::all()->load('skills')->map(function ($category) {
+        $categories = SkillCategory::with('skills')->get()->map(function (SkillCategory $category) {
             return [
                 'id' => $category->id,
                 'name' => $category->name,
-                'skills' => $category->skills->map(function ($skill) {
+                'skills' => $category->skills->map(function (Skill $skill) {
                     return [
                         'id' => $skill->id,
                         'name' => $skill->name,

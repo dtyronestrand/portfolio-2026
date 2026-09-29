@@ -18,7 +18,7 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->catchPhrase(),
+            'name' => fake()->sentence(3),
             'problem' => fake()->paragraph(3),
             'product' => fake()->paragraph(3),
             'hero' => fake()->imageUrl(1200, 800, 'business'),
