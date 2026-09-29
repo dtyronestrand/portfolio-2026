@@ -23,7 +23,7 @@ class ProjectFactory extends Factory
             'product' => fake()->paragraph(3),
             'hero' => fake()->imageUrl(1200, 800, 'business'),
             'attachments' => fake()->randomElements(
-                array_map(fn() => fake()->imageUrl(800, 600), range(1, 5)),
+                array_map(fn () => fake()->imageUrl(800, 600), range(1, 5)),
                 fake()->numberBetween(1, 3)
             ),
         ];
