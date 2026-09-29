@@ -17,7 +17,7 @@
         <div class="flex flex-1 flex-col justify-between p-6">
             <div>
                 <h3
-                    class="mb-3 inline-block border-b-2 border-primary text-xs font-bold capitalize text-(--text-display)"
+                    class="mb-3 inline-block border-b-2 border-primary text-xs font-bold text-(--text-display) capitalize"
                 >
                     {{ props.project.name }}
                 </h3>

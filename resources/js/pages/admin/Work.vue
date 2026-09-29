@@ -35,22 +35,20 @@ import { ref } from 'vue';
 import AddProjectForm from '@/components/AddProjectForm.vue';
 import Button from '@/components/ui/button/Button.vue';
 import WorkSummaryCard from '@/components/WorkSummaryCard.vue';
-    interface Props {
-        projects: {
-            id: number;
-            name: string;
-            problem: string;
-            product: string;
-            tags: string[];
-            hero: string;
-            media: string[];
-        }[];    
-        }
-    const props = defineProps<Props>();
+interface Props {
+    projects: {
+        id: number;
+        name: string;
+        problem: string;
+        product: string;
+        tags: string[];
+        hero: string;
+        media: string[];
+    }[];
+}
+const props = defineProps<Props>();
 
-    const showAddProjectForm = ref(false);
+const showAddProjectForm = ref(false);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
