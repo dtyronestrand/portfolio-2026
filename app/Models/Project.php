@@ -22,5 +22,4 @@ class Project extends Model implements HasMedia
     {
         return $this->belongsToMany(Tag::class);
     }
-
 }

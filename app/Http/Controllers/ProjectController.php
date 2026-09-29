@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
 class ProjectController extends Controller
 {
     /**
@@ -12,17 +13,20 @@ class ProjectController extends Controller
      */
     public function index()
     {
-     $work = Project::all();
-     return Inertia::render('work/Index', [
-        'projects' => $work
-     ]);
+        $work = Project::all();
+
+        return Inertia::render('work/Index', [
+            'projects' => $work,
+        ]);
     }
+
     public function admin()
     {
         return Inertia::render('admin/Work', [
-            'projects' => Project::all()
+            'projects' => Project::all(),
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -36,16 +40,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-       $request->validate([
-        'name' => 'required|string|max:255',
-        'problem' => 'required|string',
-        'product' => 'required|string',
-        'hero' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'tags' => 'nullable|array',
-        'attachments' => 'nullable|array',
-       ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'problem' => 'required|string',
+            'product' => 'required|string',
+            'hero' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tags' => 'nullable|array',
+            'attachments' => 'nullable|array',
+        ]);
 
-       $project = Project::create($request->only(['name', 'problem', 'product']));
+        $project = Project::create($request->only(['name', 'problem', 'product']));
 
         if ($request->hasFile('hero')) {
             $project->addMediaFromRequest('hero')->toMediaCollection('hero');

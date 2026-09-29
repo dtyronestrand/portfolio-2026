@@ -18,4 +18,4 @@ enum SkillLevel: int
             self::EXPERT => 'Expert',
         };
     }
-}   
+}

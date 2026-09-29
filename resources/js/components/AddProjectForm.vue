@@ -78,7 +78,9 @@
                 url="/admin/work"
                 mode="advanced"
                 :pt="{
-                    root: { class: 'border! border-dashed! rounded-lg' },
+                    root: {
+                        class: 'border! border-dashed! border-primary rounded-lg',
+                    },
                     header: { class: 'hidden!' },
                     content: { class: 'p-6!' },
                 }"

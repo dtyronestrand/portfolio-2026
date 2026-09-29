@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SkillCategory;
+use App\Enums\SkillLevel;
 use App\Models\Skill;
+use App\Models\SkillCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 use Inertia\Inertia;
-use App\Enums\SkillLevel;
 
 class SkillController extends Controller
 {
@@ -18,9 +18,10 @@ class SkillController extends Controller
     {
         //
     }
+
     public function admin()
     {
-       $categories = SkillCategory::all()->load('skills')->map(function ($category) {
+        $categories = SkillCategory::all()->load('skills')->map(function ($category) {
             return [
                 'id' => $category->id,
                 'name' => $category->name,
@@ -33,10 +34,12 @@ class SkillController extends Controller
                 }),
             ];
         });
+
         return Inertia::render('admin/Skills', [
-           'categories' => $categories
-        ]); 
+            'categories' => $categories,
+        ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -56,6 +59,7 @@ class SkillController extends Controller
             'skill_category_id' => 'required|exists:skill_categories,id',
         ]);
         Skill::create($skill);
+
         return redirect()->route('admin.skills')->with('success', 'Skill created successfully.');
     }
 
