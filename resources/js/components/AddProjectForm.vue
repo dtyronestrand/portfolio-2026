@@ -74,8 +74,10 @@
             <Label>Attachments</Label>
             <FileUpload
                 ref="attachments"
+                :auto="false"
+                :custom-upload="true"
+                @select="onFileSelect"
                 name="attachments"
-                url="/admin/work"
                 mode="advanced"
                 :pt="{
                     root: {
@@ -104,12 +106,6 @@
                                 >{{ files.length }} file(s) selected</span
                             >
                             <div class="flex items-center gap-2">
-                                <Button
-                                    variant="text"
-                                    size="small"
-                                    @click="onUpload"
-                                    >Upload</Button
-                                >
                                 <Button
                                     variant="text"
                                     size="small"
@@ -194,6 +190,7 @@ import CloudUpload from '@primeicons/vue/cloud-upload';
 import Times from '@primeicons/vue/times';
 import Button from 'primevue/button';
 import FileUpload from 'primevue/fileupload';
+import type { FileUploadSelectEvent } from 'primevue/fileupload';
 import Message from 'primevue/message';
 import Textarea from 'primevue/textarea';
 import { ref } from 'vue';
@@ -207,8 +204,15 @@ const attachments = ref();
 const onChoose = () => {
     attachments.value.choose();
 };
-const onUpload = () => {
-    attachments.value.upload();
+const form = useForm({
+    name: '',
+    problem: '',
+    product: '',
+    tags: [],
+    attachments: [],
+});
+const onFileSelect = (event: FileUploadSelectEvent) => {
+    form.attachments = event.files;
 };
 const onClear = () => {
     attachments.value.clear();
@@ -232,14 +236,6 @@ const emit = defineEmits(['cancel', 'projectAdded']);
 const handleCancel = () => {
     emit('cancel');
 };
-
-const form = useForm({
-    name: '',
-    problem: '',
-    product: '',
-    tags: [],
-    media: null,
-});
 
 function handleSubmit() {
     form.post('projects.store', {
