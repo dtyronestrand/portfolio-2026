@@ -83,6 +83,9 @@
                     root: {
                         class: 'border! border-dashed! border-primary rounded-lg',
                     },
+                    input: {
+                        class: 'hidden',
+                    },
                     content: { class: 'p-6!' },
                 }"
                 :multiple="true"
@@ -250,4 +253,8 @@ function handleSubmit() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+:deep(input[type='file']) {
+    display: none !important;
+}
+</style>

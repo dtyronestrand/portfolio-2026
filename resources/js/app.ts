@@ -19,6 +19,11 @@ createInertiaApp({
                 textarea: {
                     root: 'bg-(--surface-container-high) border border(--outline-variant))',
                 },
+                fileupload: {
+                    input: {
+                        class: 'hidden',
+                    },
+                },
             },
             license:
                 'eyJpZCI6IjQ3ZDQzMzRiLWI1ODUtNGQ3Ny1iZjE3LTdkMzJiNDg5ODdiYyIsInByb2R1Y3QiOiJwcmltZXVpIiwidGllciI6ImNvbW11bml0eSIsInR5cGUiOiJkZXYiLCJpYXQiOjE3ODk5NTg1OTMsImV4cCI6MTgyMTQ5NDU5M30.jS0TUpQql9xHyEI0WJX5D4gR5SHrU4g72KZ_cGsEvM-5ANO7SjE8EPI-MPfLQHDcVh-HDiEPdenOuz1yjurzBg',
