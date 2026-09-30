@@ -83,11 +83,13 @@
                     root: {
                         class: 'border! border-dashed! border-primary rounded-lg',
                     },
-                    header: { class: 'hidden!' },
                     content: { class: 'p-6!' },
                 }"
                 :multiple="true"
             >
+                <template #header>
+                    <span class="hidden"></span>
+                </template>
                 <template #content="{ files, removeFileCallback, messages }">
                     <div class="flex flex-col gap-4">
                         <div
@@ -202,7 +204,7 @@ interface Props {
 }
 const attachments = ref();
 const onChoose = () => {
-    attachments.value.choose();
+    attachments.value?.choose();
 };
 const form = useForm({
     name: '',
@@ -211,6 +213,7 @@ const form = useForm({
     tags: [],
     attachments: [],
 });
+
 const onFileSelect = (event: FileUploadSelectEvent) => {
     form.attachments = event.files;
 };
