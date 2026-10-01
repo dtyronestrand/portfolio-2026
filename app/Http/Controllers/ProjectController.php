@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -40,23 +42,49 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'problem' => 'required|string',
             'product' => 'required|string',
-            'hero' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'hero' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'tags' => 'nullable|array',
             'attachments' => 'nullable|array',
+            'attachments.*' => 'file|max:20480',
         ]);
+        $mediaToRollback = [];
 
-        $project = Project::create($request->only(['name', 'problem', 'product']));
+        try {
+            DB::transaction(function () use ($request, $validated, $mediaToRollback) {
+                $project = Project::create([
+                    'name' => $validated['name'],
+                    'problem' => $validated['problem'],
+                    'product' => $validated['product'],
+                ]);
 
-        if ($request->hasFile('hero')) {
-            $project->addMediaFromRequest('hero')->toMediaCollection('hero');
-        }
+                if ($request->filled('tags')) {
+                    $project->tags()->sync($validated['tags']);
+                }
 
-        if ($request->has('tags')) {
-            $project->tags()->sync($request->input('tags'));
+                if ($request->hasFile('hero')) {
+                    $media = $project->addMediaFromRequest('hero')->toMediaCollection('hero');
+
+                    $mediaToRollback[] = $media;
+                }
+                if ($request->hasFile('attachments')) {
+                    foreach ($request->file('attachments') as $index => $file) {
+                        $media = $project->addMediaFromRequest("attachments.{$index}")->toMediaCollection('attachments');
+                        $mediaToRollback[] = $media;
+                    }
+                }
+            });
+        } catch (Exception $e) {
+            foreach ($mediaToRollback as $media) {
+                try {
+                    $media->delete();
+                } catch (Exception $e) {
+                }
+            }
+            throw $e;
         }
 
         return redirect()->route('admin.work')->with('success', 'Project created successfully.');

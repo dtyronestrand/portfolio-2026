@@ -22,6 +22,106 @@
                     placeholder="Enter project name"
                 />
             </div>
+            <Label for="hero_image">Hero Image</Label>
+            <FileUpload
+                ref="hero_image"
+                name="hero_image"
+                :auto="false"
+                :custom-upload="false"
+                @select="onHeroChoose"
+                @clear="onHeroClear"
+                :pt="{
+                    root: {
+                        class: 'border! border-dashed! border-primary rounded-lg',
+                    },
+                    input: {
+                        class: 'hidden',
+                    },
+                    content: { class: 'p-6!' },
+                }"
+                mode="advanced"
+            >
+                <template #header>
+                    <span class="hidden"></span>
+                </template>
+                <template #content="{ files, removeFileCallback, messages }">
+                    <div class="flex flex-col gap-4">
+                        <div
+                            v-if="messages?.length"
+                            class="flex flex-col gap-2"
+                        >
+                            <Message
+                                v-for="msg of messages"
+                                :key="msg"
+                                severity="error"
+                                >{{ msg }}</Message
+                            >
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-(--text-muted)"
+                                >{{ files.length }} file(s) selected</span
+                            >
+                            <div class="flex items-center gap-2">
+                                <Button
+                                    variant="destructive"
+                                    size="sm"
+                                    severity="danger"
+                                    @click="onHeroClear"
+                                    >Clear</Button
+                                >
+                            </div>
+                        </div>
+                        <div v-if="files.length" class="flex flex-col gap-2">
+                            <div
+                                v-for="(file, index) of files"
+                                :key="file.name + file.size"
+                                class="flex items-center justify-between rounded-lg bg-(--surface-container) p-3"
+                            >
+                                <div class="flex items-center gap-3">
+                                    <CloudUpload
+                                        class="shrink-0 text-primary"
+                                    />
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-medium">{{
+                                            file.name
+                                        }}</span>
+                                        <span
+                                            class="text-sm text-(--text-muted)"
+                                            >{{ formatSize(file.size) }}</span
+                                        >
+                                    </div>
+                                </div>
+                                <Button
+                                    type="button"
+                                    iconOnly
+                                    variant="outline"
+                                    severity="secondary"
+                                    size="sm"
+                                    rounded
+                                    @click="removeFileCallback(index)"
+                                    ><Times
+                                /></Button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template #empty>
+                    <div
+                        class="flex cursor-pointer flex-col items-center justify-center gap-3 py-8"
+                        @click="onHeroChoose"
+                    >
+                        <CloudUpload :size="48" class="text-(--text-muted)" />
+                        <div class="text-center">
+                            <p class="mt-0 mb-1 text-lg font-medium">
+                                Drop files here
+                            </p>
+                            <p class="m-0 text-sm text-(--text-muted)">
+                                or click to browse
+                            </p>
+                        </div>
+                    </div>
+                </template>
+            </FileUpload>
             <div class="flex flex-col gap-2">
                 <Label for="problem">Problem</Label>
                 <Textarea
@@ -112,8 +212,8 @@
                             >
                             <div class="flex items-center gap-2">
                                 <Button
-                                    variant="text"
-                                    size="small"
+                                    variant="destructive"
+                                    size="sm"
                                     severity="danger"
                                     @click="onClear"
                                     >Clear All</Button
@@ -142,13 +242,11 @@
                                 </div>
                                 <Button
                                     type="button"
-                                    iconOnly
-                                    variant="text"
-                                    severity="secondary"
-                                    size="small"
+                                    variant="ghost"
+                                    size="sm"
                                     rounded
                                     @click="removeFileCallback(index)"
-                                    ><Times
+                                    ><Times color="#ffa2a2"
                                 /></Button>
                             </div>
                         </div>
@@ -176,9 +274,9 @@
         <div class="flex flex-row justify-end gap-3 pt-2">
             <Button
                 type="button"
-                variant="text"
+                variant="destructive"
                 severity="secondary"
-                size="small"
+                size="sm"
                 @click="handleCancel"
                 >Cancel</Button
             >
@@ -193,12 +291,12 @@
 import { useForm, router } from '@inertiajs/vue3';
 import CloudUpload from '@primeicons/vue/cloud-upload';
 import Times from '@primeicons/vue/times';
-import Button from 'primevue/button';
 import FileUpload from 'primevue/fileupload';
 import type { FileUploadSelectEvent } from 'primevue/fileupload';
 import Message from 'primevue/message';
 import Textarea from 'primevue/textarea';
 import { ref } from 'vue';
+import Button from '@/components/ui/button/Button.vue';
 import Input from '@/components/ui/input/Input.vue';
 import Label from '@/components/ui/label/Label.vue';
 
@@ -206,16 +304,29 @@ interface Props {
     tags: string[];
 }
 const attachments = ref();
+const hero_image = ref();
+const onHeroChoose = () => {
+    hero_image.value?.choose();
+};
+
 const onChoose = () => {
     attachments.value?.choose();
 };
+
 const form = useForm({
     name: '',
     problem: '',
+    hero: null,
     product: '',
     tags: [],
     attachments: [],
 });
+const onHeroSelect = (event: FileUploadSelectEvent) => {
+    form.hero = event.files;
+};
+const onHeroClear = () => {
+    hero_image.value?.clear();
+};
 
 const onFileSelect = (event: FileUploadSelectEvent) => {
     form.attachments = event.files;
