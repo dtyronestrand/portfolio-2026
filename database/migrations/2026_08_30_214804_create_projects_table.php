@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('problem');
             $table->text('product');
-            $table->text('hero')->nullable();
-            $table->json('attachments')->nullable();
+            $table->string('hero');
+            $table->json('attachments');
             $table->timestamps();
         });
     }

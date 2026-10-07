@@ -24,7 +24,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/work', [ProjectController::class, 'admin'])->name('admin.work');
     Route::get('/skills', [SkillController::class, 'admin'])->name('admin.skills');
     Route::post('/skills', [SkillController::class, 'store'])->name('admin.skills.store');
-    Route::post('/work', [ProjectController::class, 'store'])->name('admin.projects.store');
+    Route::post('/projects', [ProjectController::class, 'store'])->name('admin.projects.store');
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

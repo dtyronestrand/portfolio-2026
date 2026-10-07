@@ -28,7 +28,7 @@
                 name="hero_image"
                 :auto="false"
                 :custom-upload="false"
-                @select="onHeroChoose"
+                @select="onHeroSelect"
                 @clear="onHeroClear"
                 :pt="{
                     root: {
@@ -149,16 +149,17 @@
                 <select
                     id="tags"
                     v-model="form.tags"
+                    multiple
                     class="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm text-(--text-body) shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 >
                     <option disabled value="">Select Tags</option>
                     <option
                         v-for="tag in props.tags"
-                        :key="tag"
-                        :value="tag"
+                        :key="tag.id"
+                        :value="tag.id"
                         class="bg-(--surface-container) text-(--text-body)"
                     >
-                        {{ tag }}
+                        {{ tag.name }}
                     </option>
                     <option
                         value="new-tag"
@@ -271,6 +272,18 @@
             </FileUpload>
         </section>
 
+        <Message
+            v-if="Object.keys(form.errors).length"
+            severity="error"
+            size="small"
+        >
+            <ul class="m-0 list-disc pl-4">
+                <li v-for="(error, field) in form.errors" :key="field">
+                    {{ error }}
+                </li>
+            </ul>
+        </Message>
+
         <div class="flex flex-row justify-end gap-3 pt-2">
             <Button
                 type="button"
@@ -280,7 +293,7 @@
                 @click="handleCancel"
                 >Cancel</Button
             >
-            <Button type="submit" size="small" :disabled="form.processing">{{
+            <Button type="submit" size="sm" :disabled="form.processing">{{
                 form.processing ? 'Saving...' : 'Add Project'
             }}</Button>
         </div>
@@ -288,7 +301,7 @@
 </template>
 
 <script setup lang="ts">
-import { useForm, router } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import CloudUpload from '@primeicons/vue/cloud-upload';
 import Times from '@primeicons/vue/times';
 import FileUpload from 'primevue/fileupload';
@@ -301,7 +314,10 @@ import Input from '@/components/ui/input/Input.vue';
 import Label from '@/components/ui/label/Label.vue';
 
 interface Props {
-    tags: string[];
+    tags: {
+        id: number;
+        name: string;
+    }[];
 }
 const attachments = ref();
 const hero_image = ref();
@@ -313,7 +329,14 @@ const onChoose = () => {
     attachments.value?.choose();
 };
 
-const form = useForm({
+const form = useForm<{
+    name: string;
+    problem: string;
+    hero: File | null;
+    product: string;
+    tags: [];
+    attachments: File[];
+}>({
     name: '',
     problem: '',
     hero: null,
@@ -322,10 +345,11 @@ const form = useForm({
     attachments: [],
 });
 const onHeroSelect = (event: FileUploadSelectEvent) => {
-    form.hero = event.files;
+    form.hero = event.files[0] ?? null;
 };
 const onHeroClear = () => {
     hero_image.value?.clear();
+    form.hero = null;
 };
 
 const onFileSelect = (event: FileUploadSelectEvent) => {
@@ -355,10 +379,11 @@ const handleCancel = () => {
 };
 
 function handleSubmit() {
-    form.post('projects.store', {
+    form.post('/admin/projects', {
         forceFormData: true,
         onSuccess: () => {
-            router.get('admin.dashboard');
+            form.reset();
+            emit('projectAdded');
         },
     });
 }

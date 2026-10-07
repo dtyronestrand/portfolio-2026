@@ -12,8 +12,9 @@
 
         <div v-if="showAddProjectForm">
             <AddProjectForm
-                :tags="['tag1', 'tag2']"
+                :tags="props.tags"
                 @cancel="showAddProjectForm = false"
+                @project-added="showAddProjectForm = false"
             />
         </div>
 
@@ -36,6 +37,10 @@ import AddProjectForm from '@/components/AddProjectForm.vue';
 import Button from '@/components/ui/button/Button.vue';
 import WorkSummaryCard from '@/components/WorkSummaryCard.vue';
 interface Props {
+    tags: {
+        id: number;
+        name: string;
+    }[];
     projects: {
         id: number;
         name: string;
@@ -43,7 +48,7 @@ interface Props {
         product: string;
         tags: string[];
         hero: string;
-        media: string[];
+        attachments: string[];
     }[];
 }
 const props = defineProps<Props>();

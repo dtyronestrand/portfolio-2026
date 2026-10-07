@@ -8,7 +8,9 @@ import { defineConfig } from 'vite';
 import vueDevtools from 'vite-plugin-vue-devtools';
 export default defineConfig({
     plugins: [
-        vueDevtools(),
+        vueDevtools({
+            appendTo: 'resources/js/app.ts',
+        }),
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.ts'],
             refresh: true,

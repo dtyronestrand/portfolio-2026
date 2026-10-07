@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Tag;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +25,20 @@ class ProjectController extends Controller
 
     public function admin()
     {
+        $projects = Project::with('tags')->get(['id', 'name', 'problem', 'product']);
+        dd($projects);
+        foreach ($projects as &$project) {
+            $hero = $project->getMedia('hero');
+            $project['hero'] = $hero[0]->getUrl();
+
+            $attachments = $project->getMedia('attachments');
+            $project['attachments'] = $attachments->map(fn($a) => $a->getUrl());
+        };
+
+        $tags = Tag::all();
         return Inertia::render('admin/Work', [
-            'projects' => Project::all(),
+            'projects' => $projects,
+            'tags' => $tags,
         ]);
     }
 
@@ -48,13 +61,14 @@ class ProjectController extends Controller
             'product' => 'required|string',
             'hero' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'tags' => 'nullable|array',
+            'tags.*' => 'string|max:255',
             'attachments' => 'nullable|array',
             'attachments.*' => 'file|max:20480',
         ]);
         $mediaToRollback = [];
 
         try {
-            DB::transaction(function () use ($request, $validated, $mediaToRollback) {
+            DB::transaction(function () use ($request, $validated, &$mediaToRollback) {
                 $project = Project::create([
                     'name' => $validated['name'],
                     'problem' => $validated['problem'],
@@ -62,7 +76,9 @@ class ProjectController extends Controller
                 ]);
 
                 if ($request->filled('tags')) {
-                    $project->tags()->sync($validated['tags']);
+                    $tagIds = collect($validated['tags'])
+                        ->map(fn(string $name) => Tag::firstOrCreate(['name' => $name])->id);
+                    $project->tags()->sync($tagIds);
                 }
 
                 if ($request->hasFile('hero')) {

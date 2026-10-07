@@ -47,7 +47,7 @@ interface Props {
         product: string;
         tags: string[];
         hero: string;
-        media: string[];
+       attachments: string[];
     };
 }
 const props = defineProps<Props>();

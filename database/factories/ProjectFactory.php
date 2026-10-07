@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 /**
  * @extends Factory<Project>
@@ -21,11 +22,16 @@ class ProjectFactory extends Factory
             'name' => fake()->sentence(3),
             'problem' => fake()->paragraph(3),
             'product' => fake()->paragraph(3),
-            'hero' => fake()->imageUrl(1200, 800, 'business'),
-            'attachments' => fake()->randomElements(
-                array_map(fn () => fake()->imageUrl(800, 600), range(1, 5)),
-                fake()->numberBetween(1, 3)
-            ),
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Project $project) {
+            $file = UploadedFile::fake()->image('hero.jpg');
+
+            $project->addMedia($file)
+                ->toMediaCollection('hero');
+        });
     }
 }
