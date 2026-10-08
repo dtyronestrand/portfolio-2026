@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['title', 'company', 'location', 'start_date', 'end_date', 'description', 'highlights', 'resume_id'])]
-class Experience extends Model
+#[Fillable(['title', 'authors', 'publisher', 'published_at', 'url', 'description', 'resume_id'])]
+class Publication extends Model
 {
     use HasFactory;
 
@@ -20,9 +20,7 @@ class Experience extends Model
     protected function casts(): array
     {
         return [
-            'start_date' => 'date:Y-m-d',
-            'end_date' => 'date:Y-m-d',
-            'highlights' => 'array',
+            'published_at' => 'date:Y-m-d',
         ];
     }
 }

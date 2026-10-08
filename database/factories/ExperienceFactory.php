@@ -27,6 +27,7 @@ class ExperienceFactory extends Factory
             'start_date' => $startDate,
             'end_date' => fake()->optional(0.7)->dateTimeBetween($startDate, 'now'),
             'description' => fake()->paragraph(3),
+            'highlights' => fake()->sentences(3),
             'resume_id' => Resume::factory(),
         ];
     }
