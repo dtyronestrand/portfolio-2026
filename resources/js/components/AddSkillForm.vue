@@ -80,7 +80,6 @@
 <script setup lang="ts">
 import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
-import { store } from '@/actions/App/Http/Controllers/SkillController';
 import Input from '@/components/ui/input/Input.vue';
 import Label from '@/components/ui/label/Label.vue';
 import {
@@ -93,6 +92,7 @@ import {
     SelectValue,
 } from '@/components/ui/select/';
 import Button from './ui/button/Button.vue';
+import { store } from '@/actions/App/Http/Controllers/SkillController';
 interface Props {
     categories: {
         id: number;

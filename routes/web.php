@@ -27,4 +27,4 @@ Route::prefix('admin')->group(function () {
     Route::post('/projects', [ProjectController::class, 'store'])->name('admin.projects.store');
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

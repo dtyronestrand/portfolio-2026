@@ -319,7 +319,7 @@ interface Props {
         name: string;
     }[];
 }
-const attachments = ref();
+const attachments = ref([]);
 const hero_image = ref();
 const onHeroChoose = () => {
     hero_image.value?.choose();

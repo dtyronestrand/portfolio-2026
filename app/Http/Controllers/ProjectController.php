@@ -26,16 +26,16 @@ class ProjectController extends Controller
     public function admin()
     {
         $projects = Project::with('tags')->get(['id', 'name', 'problem', 'product']);
-        dd($projects);
         foreach ($projects as &$project) {
             $hero = $project->getMedia('hero');
             $project['hero'] = $hero[0]->getUrl();
 
             $attachments = $project->getMedia('attachments');
-            $project['attachments'] = $attachments->map(fn($a) => $a->getUrl());
-        };
+            $project['attachments'] = $attachments->map(fn ($a) => $a->getUrl());
+        }
 
         $tags = Tag::all();
+
         return Inertia::render('admin/Work', [
             'projects' => $projects,
             'tags' => $tags,
@@ -77,7 +77,7 @@ class ProjectController extends Controller
 
                 if ($request->filled('tags')) {
                     $tagIds = collect($validated['tags'])
-                        ->map(fn(string $name) => Tag::firstOrCreate(['name' => $name])->id);
+                        ->map(fn (string $name) => Tag::firstOrCreate(['name' => $name])->id);
                     $project->tags()->sync($tagIds);
                 }
 
