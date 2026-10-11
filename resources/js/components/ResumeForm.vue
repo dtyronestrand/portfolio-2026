@@ -1,9 +1,11 @@
 <template>
-    <form @submit.prevent="handleSubmit" class="flex max-w-180 min-w-0 flex-[1_1_300px] flex-col gap-6 py-4 px-2"
-     >
+    <form
+        @submit.prevent="handleSubmit"
+        class="flex max-w-180 min-w-0 flex-[1_1_300px] flex-col gap-6 px-2 py-4"
+    >
         <h2>Resume Profile</h2>
         <section class="grid grid-cols-2 gap-6">
-            <div>    
+            <div>
                 <label for="first_name">First Name</label>
                 <Input type="text" id="first_name" v-model="form.first_name" />
             </div>
@@ -45,9 +47,9 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
 import { update } from '@/actions/App/Http/Controllers/ResumeController';
-import {Button} from '@/components/ui/button'
-import {Input} from '@/components/ui/input'
-import {Textarea} from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 interface Props {
     resume?: {
         first_name: string;
@@ -85,6 +87,4 @@ const handleSubmit = () => {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -16,11 +16,16 @@
                 :experience="exp"
                 @close="editingId = null"
             />
-            <div v-else class="group flex flex-col gap-2 rounded-md border border-input/50 p-4">
+            <div
+                v-else
+                class="group flex flex-col gap-2 rounded-md border border-input/50 p-4"
+            >
                 <div class="flex items-center justify-between gap-4">
                     <h3 class="ds-headline-sm m-0">{{ exp.company }}</h3>
                     <div class="flex items-center gap-2">
-                        <p class="text-md m-0 text-(--text-muted)">{{ exp.start_date }} - {{ exp.end_date }}</p>
+                        <p class="text-md m-0 text-(--text-muted)">
+                            {{ exp.start_date }} - {{ exp.end_date }}
+                        </p>
                         <div
                             class="flex gap-1 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100"
                         >
@@ -46,7 +51,13 @@
                 </div>
                 <p class="text-md m-0 text-(--text-muted)">{{ exp.title }}</p>
                 <ul>
-                    <li v-for="highlight in exp.highlights" :key="highlight" class="text-md m-0 text-(--text-muted)">{{ highlight }}</li>
+                    <li
+                        v-for="highlight in exp.highlights"
+                        :key="highlight"
+                        class="text-md m-0 text-(--text-muted)"
+                    >
+                        {{ highlight }}
+                    </li>
                 </ul>
             </div>
         </template>
@@ -77,7 +88,7 @@ const deleting = ref<Experience | null>(null);
 </script>
 
 <style scoped>
-    ul {
-        list-style: inside disc;
-    }
+ul {
+    list-style: inside disc;
+}
 </style>
