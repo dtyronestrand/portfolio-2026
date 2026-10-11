@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\Resume;
+use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {

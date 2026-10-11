@@ -13,11 +13,15 @@
         <TabsContent value="education">
             <Education :resumeId="props.resume.id" :education="props.resume.educations"/>
         </TabsContent>
+        <TabsContent value="experience">
+            <Experience :resumeId="props.resume.id" :experiences="props.resume.experiences"/>
+        </TabsContent>
     </Tabs>
 </template>
 
 <script setup lang="ts">
 import Education from '@/components/Education.vue'
+import Experience from '@/components/Experience.vue'
 import ResumeForm from '@/components/ResumeForm.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 interface Props {
@@ -44,6 +48,8 @@ interface Props {
       experiences: {
         id: number;
         company: string;
+        location: string;
+        highlights: string[];
         title: string;
         start_date: string;
         end_date: string;

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Resume;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\Education;
-use App\Models\Experience;
 
 class ResumeController extends Controller
 {
@@ -30,15 +28,15 @@ class ResumeController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'address' => 'required|array',
-            "address.street" => "required|string|max:255",
-            "address.city" => "required|string|max:255",
-            "address.state" => "required|string|max:255",
+            'address.street' => 'required|string|max:255',
+            'address.city' => 'required|string|max:255',
+            'address.state' => 'required|string|max:255',
             'summary' => 'required|string',
         ]);
 
         $resume = Resume::first();
-        if (!$resume) {
-            $resume = new Resume();
+        if (! $resume) {
+            $resume = new Resume;
         }
 
         $resume->fill($validatedData);

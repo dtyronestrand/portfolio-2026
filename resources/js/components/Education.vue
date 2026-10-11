@@ -1,5 +1,5 @@
 <template>
-       <section data-screen-label="Projects" class="flex flex-col gap-6">
+       <section data-screen-label="Education" class="flex flex-col gap-6">
         <div class="flex flex-wrap items-end gap-9">
             <div class="min-w-260px flex-1">
                 <h1 class="ds-headline-lg m-[0 0 6px]">Education</h1>
