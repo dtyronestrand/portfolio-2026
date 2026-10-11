@@ -1,0 +1,1 @@
+## 2024-05-27 - Icon Button Accessibility\n**Learning:** Icon-only buttons using Lucide Vue icons require explicit `aria-label` attributes for screen readers to announce their purpose.\n**Action:** Always add `aria-label` to `<Button>` components that only contain `<component :is="icon" />` or `<Menu />`, `<Search />` style icon elements.
