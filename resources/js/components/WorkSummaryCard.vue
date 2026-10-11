@@ -2,10 +2,12 @@
     <div
         class="flex flex-col overflow-hidden rounded-lg border border-(--border-card) bg-(--surface-container) transition-colors hover:border-(--border-card-hover)"
     >
+        <!-- ⚡ Bolt: Add loading="lazy" for better frontend performance -->
         <img
             v-if="props.project.hero"
             :src="props.project.hero"
             :alt="props.project.name"
+            loading="lazy"
             class="h-48 w-full object-cover object-center"
         />
         <div

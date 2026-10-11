@@ -1,0 +1,1 @@
+## 2026-10-11 - Backend N+1 and Frontend Image Loading Optimizations\n**Learning:** Spatie MediaLibrary's `getMedia()` method in loops triggers N+1 database queries unless the `media` relationship is explicitly eager-loaded on the model.\n**Action:** Always include `media` in the `with()` array when querying models (like Project) if media items are accessed in a subsequent loop.
