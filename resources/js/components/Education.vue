@@ -73,6 +73,7 @@ import { router } from '@inertiajs/vue3';
 import { Pencil, Trash2 } from '@lucide/vue';
 import { ref } from 'vue';
 import { destroy } from '@/actions/App/Http/Controllers/EducationController';
+import AddEducationForm from '@/components/AddEducationForm.vue';
 import Button from '@/components/ui/button/Button.vue';
 import {
     Dialog,
@@ -82,7 +83,6 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import AddEducationForm from '@/components/AddEducationForm.vue';
 interface Education {
     id: number;
     school: string;
