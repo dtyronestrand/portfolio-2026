@@ -67,6 +67,7 @@
 <script setup lang="ts">
 import { Pencil, Trash2 } from '@lucide/vue';
 import { ref } from 'vue';
+import AddExperienceForm from '@/components/AddExperienceForm.vue';
 import Button from '@/components/ui/button/Button.vue';
 interface Experience {
     id: number;

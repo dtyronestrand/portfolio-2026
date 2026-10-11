@@ -26,6 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/work', [ProjectController::class, 'admin'])->name('admin.work');
     Route::get('/skills', [SkillController::class, 'admin'])->name('admin.skills');
     Route::post('/skills', [SkillController::class, 'store'])->name('admin.skills.store');
+    Route::put('/skills/{skill}', [SkillController::class, 'update'])->name('admin.skills.update');
     Route::post('/projects', [ProjectController::class, 'store'])->name('admin.projects.store');
     Route::get('/resume', [ResumeController::class, 'admin'])->name('admin.resume');
     Route::post('/experiences', [ExperienceController::class, 'store'])->name('admin.experiences.store');
