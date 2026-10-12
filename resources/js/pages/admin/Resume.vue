@@ -34,9 +34,9 @@
 <script setup lang="ts">
 import Education from '@/components/Education.vue';
 import Experience from '@/components/Experience.vue';
-import Publications from '@/components/Publications.vue';
 import ResumeForm from '@/components/ResumeForm.vue';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Publications from '@/components/Publications.vue';
 interface Props {
     resume: {
         id: number;
