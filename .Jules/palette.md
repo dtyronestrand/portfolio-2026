@@ -1,0 +1,3 @@
+## 2025-03-01 - Missing ARIA Labels on AppHeader Icon Buttons
+**Learning:** Found a pattern of icon-only buttons missing `aria-label` attributes in the main layout (`AppHeader.vue`), specifically for mobile menu, search, and user profile dropdowns. This makes the primary navigation inaccessible to screen readers.
+**Action:** When working on navigation or header components, always ensure icon-only buttons include descriptive `aria-label` attributes (e.g., "Open main menu", "Search", "Toggle user menu").
