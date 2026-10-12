@@ -42,7 +42,10 @@
         </div>
         <div class="flex flex-col gap-2">
             <label :for="`highlights-${uid}`">Highlights</label>
-            <template v-for="(highlight, index) in form.highlights" :key="index">
+            <template
+                v-for="(highlight, index) in form.highlights"
+                :key="index"
+            >
                 <div class="flex gap-2">
                     <Input
                         type="text"
@@ -58,13 +61,10 @@
                     </Button>
                 </div>
             </template>
-            <Button
-                type="button"
-                @click="form.highlights.push('')"
-            >
+            <Button type="button" @click="form.highlights.push('')">
                 Add Highlight
             </Button>
-            <InputError :message="form.errors.highlights" />    
+            <InputError :message="form.errors.highlights" />
         </div>
         <div class="flex justify-end gap-2">
             <Button type="button" variant="destructive" @click="$emit('close')"
