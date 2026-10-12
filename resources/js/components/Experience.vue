@@ -61,6 +61,32 @@
                 </ul>
             </div>
         </template>
+        <Dialog
+            :open="deleting !== null"
+            @update:open="(open) => !open && (deleting = null)"
+        >
+            <DialogContent>
+                <DialogHeader class="space-y-3">
+                    <DialogTitle>Delete this experience?</DialogTitle>
+                    <DialogDescription>
+                        {{ deleting?.title }} at {{ deleting?.company }} will be
+                        permanently removed.
+                    </DialogDescription>
+                </DialogHeader>
+                <DialogFooter class="gap-2">
+                    <Button variant="secondary" @click="deleting = null"
+                        >Cancel</Button
+                    >
+                    <Button
+                        variant="destructive"
+                        :disabled="deleteProcessing"
+                        @click="deleteExperience"
+                    >
+                        Delete
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     </section>
     <AddExperienceForm
         :resumeId="props.resumeId"
@@ -70,10 +96,20 @@
 </template>
 
 <script setup lang="ts">
+import { router } from '@inertiajs/vue3';
 import { Pencil, Trash2 } from '@lucide/vue';
 import { ref } from 'vue';
+import { destroy } from '@/actions/App/Http/Controllers/ExperienceController';
 import AddExperienceForm from '@/components/AddExperienceForm.vue';
 import Button from '@/components/ui/button/Button.vue';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
 interface Experience {
     id: number;
     title: string;
@@ -91,6 +127,20 @@ const props = defineProps<Props>();
 const addExperience = ref(false);
 const editingId = ref<number | null>(null);
 const deleting = ref<Experience | null>(null);
+const deleteProcessing = ref(false);
+
+const deleteExperience = () => {
+    if (!deleting.value) {
+        return;
+    }
+
+    router.delete(destroy.url(deleting.value.id), {
+        preserveScroll: true,
+        onStart: () => (deleteProcessing.value = true),
+        onFinish: () => (deleteProcessing.value = false),
+        onSuccess: () => (deleting.value = null),
+    });
+};
 </script>
 
 <style scoped>
