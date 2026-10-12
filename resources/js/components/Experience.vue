@@ -62,6 +62,11 @@
             </div>
         </template>
     </section>
+    <AddExperienceForm
+        :resumeId="props.resumeId"
+        v-if="addExperience"
+        @close="addExperience = false"
+    />
 </template>
 
 <script setup lang="ts">

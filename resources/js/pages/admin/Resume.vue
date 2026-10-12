@@ -22,12 +22,19 @@
                 :experiences="props.resume.experiences"
             />
         </TabsContent>
+        <TabsContent value="publications">
+            <Publications
+                :resumeId="props.resume.id"
+                :publications="props.resume.publications"
+            />
+        </TabsContent>
     </Tabs>
 </template>
 
 <script setup lang="ts">
 import Education from '@/components/Education.vue';
 import Experience from '@/components/Experience.vue';
+import Publications from '@/components/Publications.vue';
 import ResumeForm from '@/components/ResumeForm.vue';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 interface Props {
@@ -68,11 +75,12 @@ interface Props {
         }[];
         publications: {
             id: number;
-            authors: string;
+            authors: string | null;
             title: string;
             publisher: string;
             published_at: string;
-            url: string;
+            url: string | null;
+            description: string | null;
         }[];
     };
 }

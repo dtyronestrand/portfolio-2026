@@ -5,6 +5,7 @@ use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/education', [EducationController::class, 'store'])->name('admin.education.store');
     Route::put('/education/{education}', [EducationController::class, 'update'])->name('admin.education.update');
     Route::delete('/education/{education}', [EducationController::class, 'destroy'])->name('admin.education.destroy');
+    Route::post('/publications', [PublicationController::class, 'store'])->name('admin.publications.store');
+    Route::put('/publications/{publication}', [PublicationController::class, 'update'])->name('admin.publications.update');
+    Route::delete('/publications/{publication}', [PublicationController::class, 'destroy'])->name('admin.publications.destroy');
     Route::post('/resume', [ResumeController::class, 'update'])->name('admin.resume.update');
 });
 

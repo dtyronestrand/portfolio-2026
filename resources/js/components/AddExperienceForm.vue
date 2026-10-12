@@ -40,6 +40,32 @@
             />
             <InputError :message="form.errors.end_date" />
         </div>
+        <div class="flex flex-col gap-2">
+            <label :for="`highlights-${uid}`">Highlights</label>
+            <template v-for="(highlight, index) in form.highlights" :key="index">
+                <div class="flex gap-2">
+                    <Input
+                        type="text"
+                        :id="`highlights-${uid}-${index}`"
+                        v-model="form.highlights[index]"
+                    />
+                    <Button
+                        type="button"
+                        variant="destructive"
+                        @click="form.highlights.splice(index, 1)"
+                    >
+                        Remove
+                    </Button>
+                </div>
+            </template>
+            <Button
+                type="button"
+                @click="form.highlights.push('')"
+            >
+                Add Highlight
+            </Button>
+            <InputError :message="form.errors.highlights" />    
+        </div>
         <div class="flex justify-end gap-2">
             <Button type="button" variant="destructive" @click="$emit('close')"
                 >Cancel</Button

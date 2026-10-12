@@ -13,6 +13,7 @@ class ResumeController extends Controller
         $resume = Resume::query()->with('skills')
             ->with('experiences')
             ->with('educations')
+            ->with(['publications' => fn ($query) => $query->latest('published_at')])
             ->first();
 
         return Inertia::render('admin/Resume', [
