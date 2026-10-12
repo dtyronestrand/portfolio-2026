@@ -25,7 +25,7 @@ class ResumeFactory extends Factory
             'address' => [
                 'street' => fake()->streetAddress(),
                 'city' => fake()->city(),
-                'state' => fake('en_US')->state(),
+                'state' => fake()->state(),
             ],
             'summary' => fake()->paragraph(4),
         ];
