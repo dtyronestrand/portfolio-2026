@@ -2,13 +2,8 @@
 import { Head } from '@inertiajs/vue3';
 
 interface Props {
-    skills: {
-        id: number;
-        name: string;
-        level: number;
-    }[];
+    skills: string[];
 }
-
 const props = defineProps<Props>();
 </script>
 
@@ -53,8 +48,8 @@ const props = defineProps<Props>();
         >
             <div class="drift text-uppercase p-[11px 0] flex w-[200%]">
                 <div class="flex w-[50%] flex-none gap-[40px] pr-[40px]">
-                    <span v-for="skill in props.skills" :key="skill.id">
-                        <span>{{ skill.name }}</span>
+                    <span v-for="skill in props.skills" :key="skill">
+                        <span>{{ skill }}</span>
                         <span class="text-secondary"> &x25C6</span>
                     </span>
                 </div>
