@@ -25,8 +25,7 @@ class ResumeFactory extends Factory
             'address' => [
                 'street' => fake()->streetAddress(),
                 'city' => fake()->city(),
-                /** @phpstan-ignore-next-line */
-                'state' => fake('en_US')->state(),
+                'state' => fake('en_US')->format('state'),
             ],
             'summary' => fake()->paragraph(4),
         ];
