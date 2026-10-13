@@ -25,7 +25,9 @@ class ProjectController extends Controller
 
     public function admin()
     {
-        $projects = Project::with('tags')->get(['id', 'name', 'problem', 'product']);
+        // ⚡ Bolt: Eager load 'media' to prevent N+1 queries when accessing getMedia() in the loop below.
+        // This reduces database queries from O(N) to O(1) for media retrieval.
+        $projects = Project::with(['tags', 'media'])->get(['id', 'name', 'problem', 'product']);
         foreach ($projects as &$project) {
             $hero = $project->getMedia('hero');
             $project['hero'] = $hero[0]->getUrl();

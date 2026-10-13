@@ -98,7 +98,6 @@
                                     severity="secondary"
                                     size="sm"
                                     rounded
-                                    :aria-label="`Remove ${file.name}`"
                                     @click="removeFileCallback(index)"
                                     ><Times
                                 /></Button>
@@ -247,7 +246,6 @@
                                     variant="ghost"
                                     size="sm"
                                     rounded
-                                    :aria-label="`Remove ${file.name}`"
                                     @click="removeFileCallback(index)"
                                     ><Times color="#ffa2a2"
                                 /></Button>
