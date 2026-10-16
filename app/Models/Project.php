@@ -12,10 +12,20 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-#[Fillable(['name', 'slug', 'summary', 'role', 'audience', 'completed_at', 'challenge', 'solution', 'modality', 'learning_objectives', 'process', 'seat_time', 'design_rationale', 'demo_url', 'sort_order', 'is_published', 'featured', 'reflections'])]
+#[Fillable(['name', 'slug', 'summary', 'role', 'audience', 'completed_at', 'challenge', 'solution', 'modality', 'learning_objectives', 'process', 'seat_time', 'design_rationale', 'demo_url', 'sort_order', 'is_published', 'featured', 'reflection'])]
 class Project extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
+
+    protected function casts(): array
+    {
+        return [
+            'learning_objectives' => 'array',
+            'is_published' => 'boolean',
+            'featured' => 'boolean',
+            'sort_order' => 'integer',
+        ];
+    }
 
     public function tags(): BelongsToMany
     {

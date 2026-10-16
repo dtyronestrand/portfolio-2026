@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('summary');
             $table->string('role');
             $table->string('audience');
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->string('seat_time')->nullable();
             $table->text('design_rationale');
             $table->string('demo_url')->nullable();
-            $table->int('sort_order');
-            $table->bool('is_published');
-            $table->bool('featured');
+            $table->integer('sort_order')->default(0);
+            $table->boolean('is_published')->default(false);
+            $table->boolean('featured')->default(false);
             $table->text('reflection')->nullable();
             $table->timestamps();
         });

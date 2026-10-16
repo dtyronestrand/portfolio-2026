@@ -36,20 +36,13 @@ import { ref } from 'vue';
 import AddProjectForm from '@/components/AddProjectForm.vue';
 import Button from '@/components/ui/button/Button.vue';
 import WorkSummaryCard from '@/components/WorkSummaryCard.vue';
+import type { Project } from '@/types';
 interface Props {
     tags: {
         id: number;
         name: string;
     }[];
-    projects: {
-        id: number;
-        name: string;
-        problem: string;
-        product: string;
-        tags: string[];
-        hero: string;
-        attachments: string[];
-    }[];
+    projects: Project[];
 }
 const props = defineProps<Props>();
 

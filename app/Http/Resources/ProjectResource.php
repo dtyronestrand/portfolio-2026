@@ -5,15 +5,18 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin \App\Models\Project
+ */
 class ProjectResource extends JsonResource
 {
     public static $wrap = 'project';
+
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
-
     public function toArray(Request $request): array
     {
         return [
@@ -35,7 +38,22 @@ class ProjectResource extends JsonResource
             'sort_order' => $this->sort_order,
             'is_published' => $this->is_published,
             'featured' => $this->featured,
-            'reflections' => $this->reflections,
+            'reflection' => $this->reflection,
+            'tags' => $this->whenLoaded('tags', fn () => $this->tags->pluck('name')->all()),
+            // 'hero' is a singleFile collection, so return one URL (or null) rather than an array.
+            'hero' => $this->getFirstMediaUrl('hero') ?: null,
+            'gallery' => $this->getMediaUrls('gallery'),
+            'storyboard' => $this->getMediaUrls('storyboard'),
+            'design_docs' => $this->getMediaUrls('design_docs'),
+            'video' => $this->getMediaUrls('video'),
         ];
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function getMediaUrls(string $collectionName): array
+    {
+        return $this->getMedia($collectionName)->map(fn ($item) => $item->getUrl())->all();
     }
 }

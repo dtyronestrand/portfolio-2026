@@ -24,7 +24,7 @@
                     {{ props.project.name }}
                 </h3>
                 <p class="mb-4 text-sm text-(--text-muted)">
-                    {{ props.project.problem }}
+                    {{ props.project.summary }}
                 </p>
             </div>
             <TextLink
@@ -39,18 +39,11 @@
 
 <script setup lang="ts">
 import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
+import type { Project } from '@/types';
 import TextLink from './TextLink.vue';
 
 interface Props {
-    project: {
-        id: number;
-        name: string;
-        problem: string;
-        product: string;
-        tags: string[];
-        hero: string;
-        attachments: string[];
-    };
+    project: Project;
 }
 const props = defineProps<Props>();
 </script>

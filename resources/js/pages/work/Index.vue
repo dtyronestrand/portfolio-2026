@@ -10,17 +10,10 @@
 
 <script setup lang="ts">
 import WorkSummaryCard from '@/components/WorkSummaryCard.vue';
+import type { Project } from '@/types';
 
 interface Props {
-    projects: {
-        id: number;
-        name: string;
-        problem: string;
-        product: string;
-        tags: string[];
-        hero: string;
-        attachments: string[];
-    }[];
+    projects: Project[];
 }
 const props = defineProps<Props>();
 </script>
