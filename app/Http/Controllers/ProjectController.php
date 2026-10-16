@@ -36,7 +36,8 @@ class ProjectController extends Controller
         $projects = Project::with(['tags', 'media'])->get(['id', 'name', 'problem', 'product']);
         foreach ($projects as &$project) {
             $hero = $project->getMedia('hero');
-            $project['hero'] = $hero[0]->getUrl();
+            // ⚡ Bolt: Added safe check to avoid crash if hero media is missing
+            $project['hero'] = count($hero) > 0 ? $hero[0]->getUrl() : null;
 
             $attachments = $project->getMedia('attachments');
             $project['attachments'] = $attachments->map(fn ($a) => $a->getUrl());
