@@ -16,10 +16,16 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $work = Project::all();
+        $projects = Project::with(['tags', 'media'])->get(['id', 'name', 'problem', 'product']);
+        foreach ($projects as &$project) {
+            $hero = $project->getMedia('hero');
+            $project['hero'] = $hero[0]->getUrl();
+            $attachments = $project->getMedia('attachments');
+            $project['attachments'] = $attachments->map(fn ($a) => $a->getUrl());
+        }
 
         return Inertia::render('work/Index', [
-            'projects' => $work,
+            'projects' => $projects,
         ]);
     }
 
@@ -113,7 +119,15 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        $project->load(['tags', 'media']);
+        $hero = $project->getMedia('hero');
+        $project['hero'] = $hero[0]->getUrl();
+        $attachments = $project->getMedia('attachments');
+        $project['attachments'] = $attachments->map(fn ($a) => $a->getUrl());
+
+        return Inertia::render('work/Show', [
+            'project' => $project,
+        ]);
     }
 
     /**
