@@ -1,5 +1,7 @@
 <template>
-    <div></div>
+    <div>
+        
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -12,9 +14,11 @@ interface Props {
         tags: string[];
         hero: string;
         attachments: string[];
-    };
+    }
 }
 const props = defineProps<Props>();
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

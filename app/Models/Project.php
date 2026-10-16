@@ -12,14 +12,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-#[Fillable(['name', 'problem', 'product', 'hero', 'attachments'])]
+#[Fillable(['name', 'slug', 'summary', 'hero', 'attachments'])]
 class Project extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $casts = [
-        'attachments' => 'array',
-    ];
 
     public function tags(): BelongsToMany
     {
