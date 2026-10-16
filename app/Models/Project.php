@@ -12,11 +12,10 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-#[Fillable(['name', 'slug', 'summary', 'hero', 'attachments'])]
+#[Fillable(['name', 'slug', 'summary', 'role', 'audience', 'completed_at', 'challenge', 'solution', 'modality', 'learning_objectives', 'process', 'seat_time', 'design_rationale', 'demo_url', 'sort_order', 'is_published', 'featured', 'reflections'])]
 class Project extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
-
 
     public function tags(): BelongsToMany
     {
@@ -34,6 +33,9 @@ class Project extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('hero')->singleFile();
-        $this->addMediaCollection('attachments');
+        $this->addMediaCollection('gallery');
+        $this->addMediaCollection('storyboard');
+        $this->addMediaCollection('design_docs');
+        $this->addMediaCollection('video');
     }
 }
