@@ -14,10 +14,23 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('problem');
-            $table->text('product');
-            $table->string('hero')->nullable();
-            $table->json('attachments')->nullable();
+            $table->string('slug');
+            $table->string('summary');
+            $table->string('role');
+            $table->string('audience');
+            $table->string('completed_at');
+            $table->text('challenge');
+            $table->text('solution');
+            $table->string('modality');
+            $table->json('learning_objectives');
+            $table->text('process');
+            $table->string('seat_time')->nullable();
+            $table->text('design_rationale');
+            $table->string('demo_url')->nullable();
+            $table->int('sort_order');
+            $table->bool('is_published');
+            $table->bool('featured');
+            $table->text('reflection')->nullable();
             $table->timestamps();
         });
     }
