@@ -98,6 +98,7 @@
                                     severity="secondary"
                                     size="sm"
                                     rounded
+                                    aria-label="Remove file"
                                     @click="removeFileCallback(index)"
                                     ><Times
                                 /></Button>
@@ -246,6 +247,7 @@
                                     variant="ghost"
                                     size="sm"
                                     rounded
+                                    aria-label="Remove attachment"
                                     @click="removeFileCallback(index)"
                                     ><Times color="#ffa2a2"
                                 /></Button>
@@ -319,7 +321,7 @@ interface Props {
         name: string;
     }[];
 }
-const attachments = ref([]);
+const attachments = ref();
 const hero_image = ref();
 const onHeroChoose = () => {
     hero_image.value?.choose();

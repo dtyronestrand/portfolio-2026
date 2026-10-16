@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('location');
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->text('description');
+            $table->json('highlights')->nullable();
             $table->foreignId('resume_id')->constrained('resume')->onDelete('cascade');
             $table->timestamps();
         });

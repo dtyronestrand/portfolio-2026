@@ -18,9 +18,16 @@ class ResumeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'first_name' => fake()->name(),
+            'last_name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
+            'address' => [
+                'street' => fake()->streetAddress(),
+                'city' => fake()->city(),
+                /** @phpstan-ignore-next-line */
+                'state' => fake('en_US')->state(),
+            ],
             'summary' => fake()->paragraph(4),
         ];
     }

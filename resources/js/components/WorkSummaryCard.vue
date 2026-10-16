@@ -49,7 +49,7 @@ interface Props {
         product: string;
         tags: string[];
         hero: string;
-       attachments: string[];
+        attachments: string[];
     };
 }
 const props = defineProps<Props>();

@@ -89,8 +89,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { label: 'Dashboard', icon: LayoutDashboard, href: adminDashboard().url },
-    { label: 'Work Products', icon: FolderKanban, href: work().url },
+    { label: 'Projects', icon: FolderKanban, href: work().url },
     { label: 'Skills', icon: BadgeCheck, href: skills().url },
+    { label: 'Resume', icon: BadgeCheck, href: '/admin/resume' },
 ];
 
 const page = usePage();
@@ -101,7 +102,7 @@ function isActive(href: string) {
 </script>
 
 <style scoped>
-.ds-label-sm {
+.label-sm {
     font-family: var(--font-mono);
     font-size: var(--label-sm-size);
     line-height: var(--label-sm-line);

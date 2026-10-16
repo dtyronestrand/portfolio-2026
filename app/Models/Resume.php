@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['name', 'email', 'phone', 'summary'])]
+#[Fillable(['first_name', 'last_name', 'email', 'phone', 'address', 'summary'])]
 #[Table(name: 'resume')]
 class Resume extends Model
 {
@@ -36,5 +36,12 @@ class Resume extends Model
             ->withPivot('sort_order')
             ->withTimestamps()
             ->orderByPivot('sort_order');
+    }
+
+    public function casts()
+    {
+        return [
+            'address' => 'array',
+        ];
     }
 }

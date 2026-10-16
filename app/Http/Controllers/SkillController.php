@@ -53,12 +53,7 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        $skill = $request->validate([
-            'name' => 'required|string|max:255',
-            'level' => ['required', new Enum(SkillLevel::class)],
-            'skill_category_id' => 'required|exists:skill_categories,id',
-        ]);
-        Skill::create($skill);
+        Skill::create($this->validateSkill($request));
 
         return redirect()->route('admin.skills')->with('success', 'Skill created successfully.');
     }
@@ -84,7 +79,9 @@ class SkillController extends Controller
      */
     public function update(Request $request, Skill $skill)
     {
-        //
+        $skill->update($this->validateSkill($request));
+
+        return redirect()->route('admin.skills')->with('success', 'Skill updated successfully.');
     }
 
     /**
@@ -93,5 +90,14 @@ class SkillController extends Controller
     public function destroy(Skill $skill)
     {
         //
+    }
+
+    private function validateSkill(Request $request): array
+    {
+        return $request->validate([
+            'name' => 'required|string|max:255',
+            'level' => ['required', new Enum(SkillLevel::class)],
+            'skill_category_id' => 'required|exists:skill_categories,id',
+        ]);
     }
 }

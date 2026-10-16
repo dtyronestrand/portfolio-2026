@@ -12,10 +12,12 @@
             <Button @click="showAddSkillForm = true">Add Skill</Button>
         </div>
         <AddSkillForm
-            v-if="showAddSkillForm"
+            v-if="showAddSkillForm || editingSkill"
+            :key="editingSkill?.id ?? 'new'"
             :categories="categoryNames"
-            @skillAdded="handleSkillAdded"
-            @cancel="showAddSkillForm = false"
+            :skill="editingSkill ?? undefined"
+            @saved="closeSkillForm"
+            @cancel="closeSkillForm"
         />
         <div v-else class="flex flex-wrap items-start gap-[20px]">
             <div
@@ -29,12 +31,12 @@
                             :title="category.name"
                         >
                             <div
-                                class="grid grid-cols-[max-content_1fr] gap-x-8 gap-y-3 p-4"
+                                class="grid grid-cols-[max-content_1fr_max-content] gap-x-8 gap-y-3 p-4"
                             >
                                 <div
                                     v-for="skill in category.skills"
                                     :key="skill.id"
-                                    class="col-span-2 grid grid-cols-subgrid items-center"
+                                    class="group col-span-3 grid grid-cols-subgrid items-center"
                                 >
                                     <div>
                                         <span
@@ -50,6 +52,20 @@
                                             :showCount="false"
                                         ></SkillLevelSteps>
                                     </div>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon-sm"
+                                        class="opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100"
+                                        :aria-label="`Edit ${skill.name}`"
+                                        @click="
+                                            editingSkill = {
+                                                ...skill,
+                                                categoryId: category.id,
+                                            }
+                                        "
+                                    >
+                                        <Pencil />
+                                    </Button>
                                 </div>
                             </div>
                         </Tab>
@@ -61,6 +77,7 @@
 </template>
 
 <script setup lang="ts">
+import { Pencil } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import AddSkillForm from '@/components/AddSkillForm.vue';
 import SkillLevelSteps from '@/components/SkillLevelSteps.vue';
@@ -81,8 +98,15 @@ interface Props {
 
 const props = defineProps<Props>();
 const showAddSkillForm = ref(false);
-const handleSkillAdded = () => {
+const editingSkill = ref<{
+    id: number;
+    name: string;
+    level: number;
+    categoryId: number;
+} | null>(null);
+const closeSkillForm = () => {
     showAddSkillForm.value = false;
+    editingSkill.value = null;
 };
 const categoryNames = computed(() =>
     props.categories.map((category) => ({

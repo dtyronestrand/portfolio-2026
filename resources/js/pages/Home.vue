@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import SkillTicker from '@/components/SkillTicker.vue';
 import { Head } from '@inertiajs/vue3';
 
 interface Props {
-    skills: string[];
+    skills: {
+        id: number;
+        name: string;
+        level: number;
+    }[];
 }
+
 const props = defineProps<Props>();
 </script>
 
@@ -43,18 +49,7 @@ const props = defineProps<Props>();
                 </div>
             </div>
         </div>
-        <div
-            class="overflow-hidden border-t border-b bg-foreground text-background"
-        >
-            <div class="drift text-uppercase p-[11px 0] flex w-[200%]">
-                <div class="flex w-[50%] flex-none gap-[40px] pr-[40px]">
-                    <span v-for="skill in props.skills" :key="skill">
-                        <span>{{ skill }}</span>
-                        <span class="text-secondary"> &x25C6</span>
-                    </span>
-                </div>
-            </div>
-        </div>
+        <SkillTicker :skills="props.skills" />
     </main>
 </template>
 <style scoped>
