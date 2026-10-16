@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div>{{ props.project.name }}</div>
 </template>
 
 <script setup lang="ts">
