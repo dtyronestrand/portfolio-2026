@@ -1,3 +1,1 @@
-## 2023-10-25 - [Spatie MediaLibrary N+1 bottleneck]
-**Learning:** Calling `getMedia()` on models inside a loop without eager loading the `media` relationship causes a severe N+1 query performance bottleneck because Spatie MediaLibrary issues separate queries for each model's media.
-**Action:** Always eager load the `media` relationship using `with('media')` when retrieving collections of models that will have their media accessed, especially in loops.
+## 2026-10-11 - Backend N+1 and Frontend Image Loading Optimizations\n**Learning:** Spatie MediaLibrary's `getMedia()` method in loops triggers N+1 database queries unless the `media` relationship is explicitly eager-loaded on the model.\n**Action:** Always include `media` in the `with()` array when querying models (like Project) if media items are accessed in a subsequent loop.
