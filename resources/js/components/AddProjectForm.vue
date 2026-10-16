@@ -247,7 +247,7 @@
                                     variant="ghost"
                                     size="sm"
                                     rounded
-                                    aria-label="Remove file"
+                                    aria-label="Remove attachment"
                                     @click="removeFileCallback(index)"
                                     ><Times color="#ffa2a2"
                                 /></Button>
