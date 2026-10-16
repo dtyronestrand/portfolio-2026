@@ -1,3 +1,3 @@
-## 2024-10-15 - Missing aria-labels on PrimeVue FileUpload custom template remove buttons
-**Learning:** When using custom templates for PrimeVue components like FileUpload (`<template #content>`), the standard accessibility attributes are lost. Any interactive elements added in these templates, such as icon-only remove buttons (`<Button><Times/></Button>`), must manually have `aria-label` attributes added.
-**Action:** Always verify custom component templates for interactive elements and explicitly add `aria-label` when using icon-only components like `<Times>` or `<CloudUpload>`.
+## 2026-10-16 - Added ARIA label to icon-only buttons in FileUpload
+**Learning:** When using custom templates for PrimeVue components (e.g., `<template #content>` in FileUpload), standard accessibility attributes might be lost. Explicitly adding `aria-label` to interactive elements like icon-only buttons (e.g. `<Times>`) placed inside these templates is crucial for screen readers.
+**Action:** Always check interactive elements within custom component templates for proper ARIA labels, especially if they are icon-only.

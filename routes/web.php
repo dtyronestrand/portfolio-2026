@@ -20,7 +20,7 @@ Route::get('/contact', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
 });
-
+Route::get('/work/{project}', [ProjectController::class, 'show'])->name('work.show');
 Route::prefix('admin')->group(function () {
     Route::redirect('/', '/dashboard', 301);
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');

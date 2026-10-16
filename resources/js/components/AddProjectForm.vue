@@ -98,7 +98,7 @@
                                     severity="secondary"
                                     size="sm"
                                     rounded
-                                    aria-label="Remove image"
+                                    aria-label="Remove file"
                                     @click="removeFileCallback(index)"
                                     ><Times
                                 /></Button>
