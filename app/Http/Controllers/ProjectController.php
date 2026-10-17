@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProjectCollection;
+use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use App\Models\Tag;
 use Exception;
@@ -10,8 +12,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-use App\Http\Resources\ProjectCollection;
-use App\Http\Resources\ProjectResource;
 
 class ProjectController extends Controller
 {
@@ -80,7 +80,9 @@ class ProjectController extends Controller
             'featured' => 'boolean',
             'reflection' => 'nullable|string',
             'tags' => 'nullable|array',
-            'tags.*' => 'string|max:255',
+            'tags.*' => 'integer|exists:tags,id',
+            'new_tags' => 'nullable|array',
+            'new_tags.*' => 'string|max:255',
             'hero' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'gallery' => 'nullable|array',
             'gallery.*' => 'image|max:5120',
@@ -96,18 +98,18 @@ class ProjectController extends Controller
         try {
             DB::transaction(function () use ($request, $validated, &$mediaToRollback) {
                 $project = Project::create([
-                    ...Arr::except($validated, ['tags', 'hero', ...self::MEDIA_COLLECTIONS]),
+                    ...Arr::except($validated, ['tags', 'new_tags', 'hero', ...self::MEDIA_COLLECTIONS]),
                     'slug' => $validated['slug'] ?? Str::slug($validated['name']),
                     'sort_order' => $validated['sort_order'] ?? 0,
                     'is_published' => $request->boolean('is_published'),
                     'featured' => $request->boolean('featured'),
                 ]);
 
-                if ($request->filled('tags')) {
-                    $tagIds = collect($validated['tags'])
-                        ->map(fn(string $name) => Tag::firstOrCreate(['name' => $name])->id);
-                    $project->tags()->sync($tagIds);
-                }
+                // Existing tags arrive as IDs; only brand-new tags are sent by name.
+                // firstOrCreate still guards against a "new" tag that already exists.
+                $newTagIds = collect($validated['new_tags'] ?? [])
+                    ->map(fn (string $name) => Tag::firstOrCreate(['name' => trim($name)])->id);
+                $project->tags()->sync(collect($validated['tags'] ?? [])->merge($newTagIds)->unique());
 
                 if ($request->hasFile('hero')) {
                     $mediaToRollback[] = $project->addMediaFromRequest('hero')->toMediaCollection('hero');

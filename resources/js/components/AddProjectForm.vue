@@ -45,7 +45,9 @@
                 <MediaUpload
                     name="hero"
                     accept="image/*"
-                    @update:model-value="(files) => (form.hero = files[0] ?? null)"
+                    @update:model-value="
+                        (files) => (form.hero = files[0] ?? null)
+                    "
                 />
             </div>
         </section>
@@ -186,12 +188,21 @@
                     <option
                         v-for="tag in props.tags"
                         :key="tag.id"
-                        :value="tag.name"
+                        :value="tag.id"
                         class="bg-(--surface-container) text-(--text-body)"
                     >
                         {{ tag.name }}
                     </option>
                 </select>
+            </div>
+            <div class="flex flex-col gap-2">
+                <Label for="new_tags">New Tags</Label>
+                <Input
+                    type="text"
+                    id="new_tags"
+                    v-model="newTags"
+                    placeholder="Comma-separated, e.g. Storyline, Accessibility"
+                />
             </div>
         </section>
 
@@ -304,6 +315,8 @@ const textareaClass =
 
 // Edited as one objective per line, sent to the server as an array.
 const learningObjectives = ref('');
+// Tags that don't exist yet, typed as a comma-separated list and sent by name.
+const newTags = ref('');
 
 const form = useForm<{
     name: string;
@@ -324,7 +337,8 @@ const form = useForm<{
     is_published: boolean;
     featured: boolean;
     reflection: string;
-    tags: string[];
+    tags: number[];
+    new_tags: string[];
     hero: File | null;
     gallery: File[];
     storyboard: File[];
@@ -350,6 +364,7 @@ const form = useForm<{
     featured: false,
     reflection: '',
     tags: [],
+    new_tags: [],
     hero: null,
     gallery: [],
     storyboard: [],
@@ -371,6 +386,10 @@ function handleSubmit() {
             .split('\n')
             .map((line) => line.trim())
             .filter(Boolean),
+        new_tags: newTags.value
+            .split(',')
+            .map((name) => name.trim())
+            .filter(Boolean),
         // FormData can't send real booleans; Laravel's boolean rule accepts 1/0.
         is_published: data.is_published ? 1 : 0,
         featured: data.featured ? 1 : 0,
@@ -379,6 +398,7 @@ function handleSubmit() {
         onSuccess: () => {
             form.reset();
             learningObjectives.value = '';
+            newTags.value = '';
             emit('projectAdded');
         },
     });
