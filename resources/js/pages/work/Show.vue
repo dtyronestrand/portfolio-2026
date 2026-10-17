@@ -1,5 +1,5 @@
 <template>
-    <div>{{ props.project.name }}</div>
+    <h1 class="text-(length:--headline-lg-size)">{{ props.project.name }}</h1>
 </template>
 
 <script setup lang="ts">

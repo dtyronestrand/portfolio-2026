@@ -26,7 +26,10 @@ class Project extends Model implements HasMedia
             'sort_order' => 'integer',
         ];
     }
-
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);

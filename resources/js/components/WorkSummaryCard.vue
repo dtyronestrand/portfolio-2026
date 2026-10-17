@@ -28,7 +28,7 @@
                 </p>
             </div>
             <TextLink
-                :href="`/work/${props.project.id}`"
+                :href="`/work/${props.project.slug}`"
                 class="text-xs text-primary hover:underline"
             >
                 View Project
