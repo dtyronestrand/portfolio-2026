@@ -27,8 +27,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        // ⚡ Bolt: Eager load 'tags' and 'media' so the resource doesn't run extra queries per project.
-        $projects = Project::with(['tags', 'media'])->orderBy('sort_order')->get();
+        // ⚡ Bolt: Eager load 'tags' and ONLY 'hero' media so the resource doesn't run extra queries or over-fetch media per project.
+        $projects = Project::with(['tags', 'media' => fn ($q) => $q->where('collection_name', 'hero')])->orderBy('sort_order')->get();
 
         // Spread the resource's response body into the props so the wrap key
         // ("projects") becomes the prop name instead of a nested "data" key.
@@ -37,8 +37,8 @@ class ProjectController extends Controller
 
     public function admin()
     {
-        // ⚡ Bolt: Eager load 'tags' and 'media' so the resource doesn't run extra queries per project.
-        $projects = Project::with(['tags', 'media'])->orderBy('sort_order')->get();
+        // ⚡ Bolt: Eager load 'tags' and ONLY 'hero' media so the resource doesn't run extra queries or over-fetch media per project.
+        $projects = Project::with(['tags', 'media' => fn ($q) => $q->where('collection_name', 'hero')])->orderBy('sort_order')->get();
 
         return Inertia::render('admin/Work', [
             ...(new ProjectCollection($projects))->response()->getData(true),
