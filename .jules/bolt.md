@@ -1,1 +1,4 @@
 ## 2026-10-11 - Backend N+1 and Frontend Image Loading Optimizations\n**Learning:** Spatie MediaLibrary's `getMedia()` method in loops triggers N+1 database queries unless the `media` relationship is explicitly eager-loaded on the model.\n**Action:** Always include `media` in the `with()` array when querying models (like Project) if media items are accessed in a subsequent loop.
+## 2026-10-18 - Over-fetching unused Media properties
+**Learning:** Eager loading the entire `media` relationship using `Project::with(['media'])` on index endpoints can lead to significant over-fetching and memory bloat, especially when heavy media objects like video or galleries are loaded but not displayed.
+**Action:** For listing endpoints, constrain the eager load specifically to the media collections needed for the preview, for example using `Project::with(['media' => fn($q) => $q->where('collection_name', 'hero')])`.
