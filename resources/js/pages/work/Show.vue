@@ -81,13 +81,24 @@
         </nav>
         
     </aside>
-    <section class="p-4 grid grid-cols-subgrid col-start-2 col-end-4 row-start-1 row-end-3 bg-(--surface-container-low)">
-        <article class="col-span-1">
-            <h2>Challenge</h2>
-        </article>
-        <article class="col-span-1">
-            <h2>Solution</h2>
-        </article>
+    <section class="p-4 gap-4 grid grid-cols-subgrid col-start-2 col-end-4 row-start-1 row-end-3 ">
+        <Card class="col-span-1">
+            <CardHeader>
+
+                <CardTitle>Challenge</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <p>{{ props.project.challenge }}</p>
+            </CardContent>
+        </Card>
+        <Card class="col-span-1">
+            <CardHeader>
+                <CardTitle>Solution</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <p>{{ props.project.solution }}</p>
+            </CardContent>
+        </Card>
     </section>
     </section>
 </template>
@@ -102,6 +113,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import {Card, CardContent, CardTitle, CardHeader} from '@/components/ui/card';
 import { Link } from '@inertiajs/vue3';
 import Tag from 'primevue/tag';
 import { Button } from '@/components/ui/button/index';
