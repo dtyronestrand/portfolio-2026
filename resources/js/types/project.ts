@@ -1,3 +1,5 @@
+import type { Media } from '@/types/media';
+
 export type Project = {
     id: number;
     name: string;
@@ -20,8 +22,8 @@ export type Project = {
     reflection: string | null;
     tags: string[];
     hero: string | null;
-    gallery: string[];
-    storyboard: string[];
-    design_docs: string[];
-    video: string[];
+    gallery: Media[];
+    storyboard: Media[];
+    design_docs: Media[];
+    video: Media[];
 };

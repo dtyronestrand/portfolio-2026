@@ -40,13 +40,16 @@ class ProjectResource extends JsonResource
             'is_published' => $this->is_published,
             'featured' => $this->featured,
             'reflection' => $this->reflection,
-            'tags' => $this->whenLoaded('tags', fn () => $this->tags->pluck('name')->all()),
+            'tags' => $this->whenLoaded('tags', fn() => $this->tags->pluck('name')->all()),
             // 'hero' is a singleFile collection, so return one URL (or null) rather than an array.
             'hero' => $this->getFirstMediaUrl('hero') ?: null,
-            'gallery' => $this->getMediaUrls('gallery'),
-            'storyboard' => $this->getMediaUrls('storyboard'),
-            'design_docs' => $this->getMediaUrls('design_docs'),
-            'video' => $this->getMediaUrls('video'),
+            'gallery' => $this->mediaWithPreviews('gallery'),
+            'storyboard' => $this->mediaWithPreviews('storyboard'),
+            'design_docs' => $this->mediaWithPreviews('design_docs'),
+            'video' => $this->mediaWithPreviews('video'),
+            // MediaCollection::jsonSerialize() returns [] for relationship collections
+            // (use_default_collection_serialization = false), so serialize the models directly.
+
         ];
     }
 
@@ -55,6 +58,16 @@ class ProjectResource extends JsonResource
      */
     private function getMediaUrls(string $collectionName): array
     {
-        return $this->getMedia($collectionName)->map(fn ($item) => $item->getUrl())->all();
+        return $this->getMedia($collectionName)->map(fn($item) => $item->getUrl())->all();
+    }
+
+    private function mediaWithPreviews(string $collectionName): array
+    {
+        return $this->getMedia($collectionName)->map(fn($item) => [
+            'id' => $item->id,
+            'name' => $item->name,
+            'original_url' => $item->getUrl(),
+            'preview_url' => $item->hasGeneratedConversion('preview') ? $item->getUrl('preview') : null,
+        ])->all();
     }
 }
