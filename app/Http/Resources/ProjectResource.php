@@ -40,7 +40,7 @@ class ProjectResource extends JsonResource
             'is_published' => $this->is_published,
             'featured' => $this->featured,
             'reflection' => $this->reflection,
-            'tags' => $this->whenLoaded('tags', fn() => $this->tags->pluck('name')->all()),
+            'tags' => $this->whenLoaded('tags', fn () => $this->tags->pluck('name')->all()),
             // 'hero' is a singleFile collection, so return one URL (or null) rather than an array.
             'hero' => $this->getFirstMediaUrl('hero') ?: null,
             'gallery' => $this->mediaWithPreviews('gallery'),
@@ -58,12 +58,12 @@ class ProjectResource extends JsonResource
      */
     private function getMediaUrls(string $collectionName): array
     {
-        return $this->getMedia($collectionName)->map(fn($item) => $item->getUrl())->all();
+        return $this->getMedia($collectionName)->map(fn ($item) => $item->getUrl())->all();
     }
 
     private function mediaWithPreviews(string $collectionName): array
     {
-        return $this->getMedia($collectionName)->map(fn($item) => [
+        return $this->getMedia($collectionName)->map(fn ($item) => [
             'id' => $item->id,
             'name' => $item->name,
             'original_url' => $item->getUrl(),
