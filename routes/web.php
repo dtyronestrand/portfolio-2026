@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -17,10 +18,12 @@ Route::get('/skills', [SkillController::class, 'index'])->name('skills');
 Route::get('/contact', function () {
     return inertia('Contact');
 })->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
 });
 Route::get('/work/{project}', [ProjectController::class, 'show'])->name('work.show');
+
 Route::prefix('admin')->group(function () {
     Route::redirect('/', '/dashboard', 301);
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -42,4 +45,4 @@ Route::prefix('admin')->group(function () {
     Route::post('/resume', [ResumeController::class, 'update'])->name('admin.resume.update');
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

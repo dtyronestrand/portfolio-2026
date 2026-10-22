@@ -3,13 +3,12 @@ import { Link } from '@inertiajs/vue3';
 import { useResizeObserver } from '@vueuse/core';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useCurrentUrl } from '@/composables/useCurrentUrl';
-import { home, work, resume, contact, skills } from '@/routes';
+import { home, work, resume, contact } from '@/routes';
 
 const navItems = [
     { label: 'Home', href: home(), exact: true },
     { label: 'Work', href: work(), exact: false },
     { label: 'Resume', href: resume(), exact: false },
-    { label: 'Skills', href: skills(), exact: false },
     { label: 'Contact', href: contact(), exact: false },
 ];
 

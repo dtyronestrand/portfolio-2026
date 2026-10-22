@@ -8,6 +8,7 @@ use App\Models\Publication;
 use App\Models\Resume;
 use App\Models\Skill;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 class ResumeTest extends TestCase
@@ -79,5 +80,42 @@ class ResumeTest extends TestCase
 
         $this->assertCount(3, $resume->publications);
         $this->assertNotEmpty($resume->skills);
+    }
+
+    public function test_the_public_resume_page_renders_without_a_resume()
+    {
+        $this->get(route('resume'))
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Resume')
+                ->where('resume', null)
+            );
+    }
+
+    public function test_the_public_resume_page_shows_the_resume_without_the_street_address()
+    {
+        $resume = Resume::factory()->create([
+            'address' => ['street' => '1 Private Lane', 'city' => 'Richmond', 'state' => 'Virginia'],
+        ]);
+        Experience::factory()->create(['resume_id' => $resume->id, 'start_date' => '2018-01-01', 'end_date' => '2020-06-01']);
+        $current = Experience::factory()->create(['resume_id' => $resume->id, 'start_date' => '2021-02-01', 'end_date' => null]);
+        Education::factory()->create(['resume_id' => $resume->id]);
+        Publication::factory()->create(['resume_id' => $resume->id]);
+        $resume->skills()->attach(Skill::factory()->create());
+
+        $this->get(route('resume'))
+            ->assertOk()
+            ->assertDontSee('1 Private Lane')
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Resume')
+                ->where('resume.location', 'Richmond, Virginia')
+                ->missing('resume.address')
+                ->has('resume.experiences', 2)
+                ->where('resume.experiences.0.id', $current->id)
+                ->where('resume.experiences.0.start_date', '2021-02-01')
+                ->has('resume.educations', 1)
+                ->has('resume.publications', 1)
+                ->has('resume.skill_categories.0.skills', 1)
+            );
     }
 }
