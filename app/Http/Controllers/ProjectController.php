@@ -28,7 +28,7 @@ class ProjectController extends Controller
     public function index()
     {
         // ⚡ Bolt: Eager load 'tags' and ONLY 'hero' media so the resource doesn't run extra queries or over-fetch media per project.
-        $projects = Project::with(['tags', 'media' => fn ($q) => $q->where('collection_name', 'hero')])->orderBy('sort_order')->get();
+        $projects = Project::where('is_published', true)->with(['tags', 'media' => fn($q) => $q->where('collection_name', 'hero')])->orderBy('sort_order')->get();
 
         // Spread the resource's response body into the props so the wrap key
         // ("projects") becomes the prop name instead of a nested "data" key.
@@ -38,7 +38,7 @@ class ProjectController extends Controller
     public function admin()
     {
         // ⚡ Bolt: Eager load 'tags' and ONLY 'hero' media so the resource doesn't run extra queries or over-fetch media per project.
-        $projects = Project::with(['tags', 'media' => fn ($q) => $q->where('collection_name', 'hero')])->orderBy('sort_order')->get();
+        $projects = Project::with(['tags', 'media' => fn($q) => $q->where('collection_name', 'hero')])->orderBy('sort_order')->get();
 
         return Inertia::render('admin/Work', [
             ...(new ProjectCollection($projects))->response()->getData(true),
@@ -108,7 +108,7 @@ class ProjectController extends Controller
                 // Existing tags arrive as IDs; only brand-new tags are sent by name.
                 // firstOrCreate still guards against a "new" tag that already exists.
                 $newTagIds = collect($validated['new_tags'] ?? [])
-                    ->map(fn (string $name) => Tag::firstOrCreate(['name' => trim($name)])->id);
+                    ->map(fn(string $name) => Tag::firstOrCreate(['name' => trim($name)])->id);
                 $project->tags()->sync(collect($validated['tags'] ?? [])->merge($newTagIds)->unique());
 
                 if ($request->hasFile('hero')) {
@@ -139,6 +139,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        if (!$project->is_published) {
+            abort(404);
+        }
         $project->load(['tags', 'media']);
 
         return Inertia::render('work/Show', (new ProjectResource($project))->response()->getData(true));
