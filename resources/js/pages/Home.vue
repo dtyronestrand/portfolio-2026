@@ -32,7 +32,7 @@ const props = defineProps<Props>();
             Designing Innovative Learner Centered Learning Experiences
         </h1>
         <div
-            class="align-start mt-[40px] grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-[56px]"
+            class="align-start mt-[40px] grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-[32px]"
         >
             <p class="m-0 max-w-[54ch] text-pretty">
                 Twenty-five years in education, seven of them on the design
