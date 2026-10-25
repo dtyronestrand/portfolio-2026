@@ -41,6 +41,7 @@
         "@lucide/vue": "^1.60.0",
         "@primeicons/vue": "^8.0.1",
         "@primeuix/themes": "^3.0.1",
+        "@tiptap/extension-list": "^3.32.0",
         "@tiptap/pm": "^3.32.0",
         "@tiptap/starter-kit": "^3.32.0",
         "@tiptap/vue-3": "^3.32.0",

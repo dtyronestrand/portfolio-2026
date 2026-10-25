@@ -8,12 +8,44 @@
         type="button"
         @click="editor.chain().focus().toggleItalic().run()" 
         :disabled="!editor.can().chain().focus().toggleItalic().run()" 
-        :class="{ 'bg-gray-200': editor.isActive('italic') }"
+        :class="{ 'bg-(--inverse-surface)': editor.isActive('italic') }"
         class="px-2 py-1 text-sm border rounded hover:bg-(--surface-container-low)"
       >
         Italic
       </button>
-        </div>
+
+      
+              <button
+              type="button"
+              @click="editor.chain().focus().toggleBulletList().run()"
+              :class="{ 'bg-(--surface-container)': editor.isActive('bulletList') }"
+              class="px-2 py-1 text-sm border rounded hover:bg-(--surface-container-low)"
+              >
+              Toggle bullet list
+            </button>
+            <button
+            type="button"
+            @click="editor.chain().focus().splitListItem('listItem').run()"
+            :disabled="!editor.can().splitListItem('listItem')"
+            >
+            Split list item
+        </button>
+        <button
+        type="button"
+        @click="editor.chain().focus().sinkListItem('listItem').run()"
+        :disabled="!editor.can().sinkListItem('listItem')"
+        >
+        Sink list item
+    </button>
+    <button
+    type="button"
+    @click="editor.chain().focus().liftListItem('listItem').run()"
+    :disabled="!editor.can().liftListItem('listItem')"
+    >
+    Lift list item
+</button>
+</div>
+
   <editor-content :editor="editor" class="prose max-w-none p-4 min-h-[150px] focus:outline-none" />
   </div>
 </template>
@@ -48,7 +80,26 @@ watch(() => props.modelValue, (value) => {
 })
 </script>
 <style scoped>
-.tiptap:focus {
+:deep(.tiptap:focus) {
     outline: none;
+}
+
+:deep(.tiptap ul),
+:deep(.tiptap ol) {
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+}
+
+:deep(.tiptap ul) {
+    list-style-type: disc;
+}
+
+:deep(.tiptap ol) {
+    list-style-type: decimal;
+}
+
+:deep(.tiptap li p) {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 </style>
