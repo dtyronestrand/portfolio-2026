@@ -52,9 +52,7 @@ const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl();
 const activeItemStyles =
     'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
 
-const mainNavItems: NavItem[] = [
-
-];
+const mainNavItems: NavItem[] = [];
 
 const rightNavItems: NavItem[] = [
     {
@@ -140,8 +138,6 @@ const rightNavItems: NavItem[] = [
                         </SheetContent>
                     </Sheet>
                 </div>
-
-             
 
                 <!-- Desktop Menu -->
                 <div class="hidden h-full lg:flex lg:flex-1">
