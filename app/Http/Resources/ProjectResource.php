@@ -56,11 +56,6 @@ class ProjectResource extends JsonResource
     /**
      * @return array<int, string>
      */
-    private function getMediaUrls(string $collectionName): array
-    {
-        return $this->getMedia($collectionName)->map(fn ($item) => $item->getUrl())->all();
-    }
-
     private function mediaWithPreviews(string $collectionName): array
     {
         return $this->getMedia($collectionName)->map(fn ($item) => [

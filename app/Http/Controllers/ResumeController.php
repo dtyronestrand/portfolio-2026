@@ -25,7 +25,7 @@ class ResumeController extends Controller
         }
 
         $skillCategories = $resume->skills
-            ->groupBy(fn (Skill $skill) => $skill->skillCategory?->name ?? 'Other')
+            ->groupBy(fn (Skill $skill) => $skill->skillCategory->name ?? 'Other')
             ->map(fn ($skills, $name) => [
                 'name' => $name,
                 'skills' => $skills->map(fn (Skill $skill) => [
