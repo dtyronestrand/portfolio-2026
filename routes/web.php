@@ -23,7 +23,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/work/{project}', [ProjectController::class, 'show'])->name('work.show');
 
 Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::redirect('/', '/dashboard', 301);
+    Route::redirect('/', '/admin/dashboard', 301);
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/work', [ProjectController::class, 'admin'])->name('admin.work');
     Route::get('/skills', [SkillController::class, 'admin'])->name('admin.skills');

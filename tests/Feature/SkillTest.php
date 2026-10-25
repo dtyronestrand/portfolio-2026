@@ -5,12 +5,21 @@ namespace Tests\Feature;
 use App\Enums\SkillLevel;
 use App\Models\Skill;
 use App\Models\SkillCategory;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SkillTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // The admin routes sit behind the auth middleware.
+        $this->actingAs(User::factory()->create());
+    }
 
     public function test_a_skill_can_be_updated()
     {

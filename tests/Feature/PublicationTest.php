@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Publication;
 use App\Models\Resume;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
@@ -11,6 +12,14 @@ use Tests\TestCase;
 class PublicationTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // The admin routes sit behind the auth middleware.
+        $this->actingAs(User::factory()->create());
+    }
 
     public function test_the_admin_resume_page_lists_publications_newest_first()
     {

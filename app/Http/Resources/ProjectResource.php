@@ -54,7 +54,7 @@ class ProjectResource extends JsonResource
     }
 
     /**
-     * @return array<int, string>
+     * @return array<int, array{id: int, name: string, original_url: string, preview_url: string|null}>
      */
     private function mediaWithPreviews(string $collectionName): array
     {
