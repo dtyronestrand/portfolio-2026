@@ -1,6 +1,6 @@
 <template>
     <div v-if="editor" class="border border-(--border) rounded-md overflow-hidden">
-        <div class="bg-(--surface-container-high) border-b border-(--border) p-2 flex gap-1 flex-wrap">
+        <div class="bg-(--surface-container-lowest) border-b border-(--border) p-2 flex gap-1 flex-wrap">
             <button type="button" @click="editor.chain().focus().toggleBold().run()" :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{'bg-(--inverse-surface)' : editor.isActive('bold') }" class="px-2 py-1 text-sm border rounded hover:bg-(--surface-container-low)">
                 Bold
             </button>

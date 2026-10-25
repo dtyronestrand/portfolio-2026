@@ -1,7 +1,7 @@
 <template>
     <form
         @submit.prevent="handleSubmit"
-        class="flex max-w-180 min-w-0 flex-[1_1_300px] flex-col gap-6 rounded-lg border border-(--border-card) bg-(--surface-container-low) p-6"
+        class="flex self-center max-w-180 min-w-0 flex-[1_1_300px] flex-col gap-6 rounded-lg border border-(--border-card) bg-(--surface-container-low) p-6"
     >
         <div class="flex flex-col gap-1">
             <span class="text-xs tracking-wider text-(--text-muted) uppercase"
