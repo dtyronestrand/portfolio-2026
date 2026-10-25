@@ -84,9 +84,11 @@ onMounted(() => {
 
 <template>
     <div
-        class="relative antialiased min-h-screen bg-background p-6 text-foreground lg:justify-center lg:p-8"
+        class="relative min-h-screen bg-background p-6 text-foreground antialiased lg:justify-center lg:p-8"
     >
-       <div class="pointer-events-none fixed inset-0 z-50 bg-grain opacity-[0.04] mix-blend-overlay" />
+        <div
+            class="bg-grain pointer-events-none fixed inset-0 z-50 opacity-[0.04] mix-blend-overlay"
+        />
         <header
             class="sticky top-4 z-40 mx-auto mb-6 flex w-full max-w-[1280px] flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-lg border border-border bg-(--glass-tint) px-4 py-2 backdrop-blur-md"
         >
@@ -143,8 +145,7 @@ onMounted(() => {
             </nav>
         </header>
         <slot></slot>
-        </div>
-    
+    </div>
 </template>
 <style scoped>
 @reference '../../css/app.css';

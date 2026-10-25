@@ -44,25 +44,13 @@
                 <div
                     class="flex flex-col gap-[8px] rounded-[8px] border border-(--outline-variant) bg-(--surface-container-low) p-[14px]"
                 >
-                    <span class="ds-label-sm text-xs">Public Site</span>
+                    <Link :href="homeRoute" class="ds-label-sm text-xs"
+                        >Public Site</Link
+                    >
                 </div>
             </div>
         </aside>
         <main class="flex min-w-0 flex-col">
-            <header
-                class="p-[14px 32px] sticky top-0 z-5 flex items-center gap-[16px] border-b border-b-(--outline-variant) bg-(--glass-tint) backdrop-blur-[12px]"
-            >
-                <div class="max-w-[360px] min-w-0 flex-1">
-                    <Input
-                        placeholder="Search skills, work, resume"
-                        hint-size="100%, 40px"
-                    />
-                </div>
-                <span class="ds-label-sm ml-auto text-xs text-(--text-faint)"
-                    >Autosaved</span
-                >
-                <Button variant="secondary" size="sm">Publish Changes</Button>
-            </header>
             <div
                 class="box-border flex max-w-[1280px] flex-col gap-[28px] p-[32px]"
             >
@@ -76,22 +64,25 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import { LayoutDashboard, FolderKanban, BadgeCheck } from '@lucide/vue';
 import type { LucideIcon } from '@lucide/vue';
-import Button from '@/components/ui/button/Button.vue';
-import Input from '@/components/ui/input/Input.vue';
-import { dashboard as adminDashboard, work, skills } from '@/routes/admin';
-
+import {
+    dashboard as adminDashboard,
+    work,
+    skills,
+    resume,
+} from '@/routes/admin';
+import { home } from '@/routes';
 interface NavItem {
     label: string;
     icon: LucideIcon;
     href: string;
     count?: number;
 }
-
+const homeRoute = home().url;
 const navItems: NavItem[] = [
     { label: 'Dashboard', icon: LayoutDashboard, href: adminDashboard().url },
     { label: 'Projects', icon: FolderKanban, href: work().url },
     { label: 'Skills', icon: BadgeCheck, href: skills().url },
-    { label: 'Resume', icon: BadgeCheck, href: '/admin/resume' },
+    { label: 'Resume', icon: BadgeCheck, href: resume().url },
 ];
 
 const page = usePage();

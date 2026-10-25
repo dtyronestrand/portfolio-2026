@@ -6,7 +6,6 @@ use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
-use Awcodes\ContentFaker\RichEditorFaker;
 
 /**
  * @extends Factory<Project>
@@ -94,7 +93,7 @@ class ProjectFactory extends Factory
 
         while (count($documents) < $count) {
             $documents[] = fake()->boolean(30)
-                ? UploadedFile::fake()->image(fake()->unique()->slug(2) . '.png', 800, 600)
+                ? UploadedFile::fake()->image(fake()->unique()->slug(2).'.png', 800, 600)
                 : $this->fakeDocument();
         }
 
@@ -106,7 +105,7 @@ class ProjectFactory extends Factory
         $extension = fake()->randomKey(self::DOCUMENT_TYPES);
 
         return UploadedFile::fake()->create(
-            fake()->unique()->slug(2) . '.' . $extension,
+            fake()->unique()->slug(2).'.'.$extension,
             random_int(20, 500),
             self::DOCUMENT_TYPES[$extension],
         );

@@ -10,7 +10,7 @@
             <Button @click="showAddProjectForm = true">Add Project</Button>
         </div>
 
-        <div v-if="showAddProjectForm">
+        <div class="flex w-full justify-center" v-if="showAddProjectForm">
             <AddProjectForm
                 :tags="props.tags"
                 @cancel="showAddProjectForm = false"

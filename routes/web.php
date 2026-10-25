@@ -43,4 +43,4 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/resume', [ResumeController::class, 'update'])->name('admin.resume.update');
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

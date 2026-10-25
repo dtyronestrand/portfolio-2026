@@ -1,7 +1,7 @@
 <template>
     <form
         @submit.prevent="handleSubmit"
-        class="flex self-center max-w-180 min-w-0 flex-[1_1_300px] flex-col gap-6 rounded-lg border border-(--border-card) bg-(--surface-container-low) p-6"
+        class="flex max-w-180 min-w-0 flex-[1_1_300px] flex-col gap-6 self-center rounded-lg border border-(--border-card) bg-(--surface-container-low) p-6"
     >
         <div class="flex flex-col gap-1">
             <span class="text-xs tracking-wider text-(--text-muted) uppercase"
@@ -112,27 +112,27 @@
         <section class="flex flex-col gap-4">
             <div class="flex flex-col gap-2">
                 <Label for="challenge">Challenge</Label>
-              <TiptapEditor v-model="form.challenge"/>
+                <TiptapEditor v-model="form.challenge" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="solution">Solution</Label>
-             <TiptapEditor v-model="form.solution"/>
+                <TiptapEditor v-model="form.solution" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="learning_objectives">Learning Objectives</Label>
-              <TiptapEditor v-model="form.learning_objectives"/>
+                <TiptapEditor v-model="form.learning_objectives" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="process">Process</Label>
-                <TiptapEditor v-model="form.process"/>
+                <TiptapEditor v-model="form.process" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="design_rationale">Design Rationale</Label>
-                <TiptapEditor v-model="form.design_rationale"/>
+                <TiptapEditor v-model="form.design_rationale" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="reflection">Reflection</Label>
-              <TiptapEditor v-model="form.reflection"/>
+                <TiptapEditor v-model="form.reflection" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="tags">Tags</Label>
@@ -261,14 +261,12 @@ import { Checkbox } from '@/components/ui/checkbox';
 import Input from '@/components/ui/input/Input.vue';
 import Label from '@/components/ui/label/Label.vue';
 
-
 interface Props {
     tags: {
         id: number;
         name: string;
     }[];
 }
-
 
 // Edited as one objective per line, sent to the server as an array.
 const learningObjectives = ref('');
@@ -281,7 +279,7 @@ const form = useForm<{
     summary: string;
     role: string;
     audience: string;
-    completed_at: string;   
+    completed_at: string;
     challenge: string;
     solution: string;
     modality: string;

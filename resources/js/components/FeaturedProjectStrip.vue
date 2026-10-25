@@ -48,9 +48,7 @@
                     <dd
                         v-html="project.challenge"
                         class="line-clamp-3 text-[15px] leading-6 text-(--text-muted)"
-                    >
-                       
-                    </dd>
+                    ></dd>
                 </div>
                 <div
                     v-if="project.solution"
@@ -64,9 +62,7 @@
                     <dd
                         v-html="project.solution"
                         class="line-clamp-3 text-[15px] leading-6 text-(--text-muted)"
-                    >
-                   
-                    </dd>
+                    ></dd>
                 </div>
             </dl>
 
