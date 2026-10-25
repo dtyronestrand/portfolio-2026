@@ -1,6 +1,6 @@
 <template>
     <div
-        class="mt-4 box-border w-full overflow-hidden bg-(--surface-container-lowest) rounded border border-(--outline) py-[10px] text-(--inverse-on-surface)"
+        class="mt-4 box-border w-full overflow-hidden rounded border border-(--outline) bg-(--surface-container-lowest) py-[10px] text-(--inverse-on-surface)"
     >
         <div class="marquee flex w-max">
             <div class="marquee-group flex pl-[20px] whitespace-nowrap">
