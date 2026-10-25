@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
+use Awcodes\ContentFaker\RichEditorFaker;
 
 /**
  * @extends Factory<Project>
@@ -42,18 +43,18 @@ class ProjectFactory extends Factory
             'role' => fake()->randomElement(['Instructional Designer', 'eLearning Developer', 'Learning Experience Designer']),
             'audience' => fake()->randomElement(['New hires', 'Sales associates', 'Healthcare staff', 'Undergraduate students']),
             'completed_at' => fake()->date('F Y'),
-            'challenge' => fake()->paragraph(3),
-            'solution' => fake()->paragraph(3),
+            'challenge' => html_faker()->paragraphs(3),
+            'solution' => html_faker()->paragraphs(3),
             'modality' => fake()->randomElement(['eLearning', 'Instructor-led', 'Blended', 'Microlearning', 'Video']),
-            'learning_objectives' => fake()->sentences(random_int(3, 5)),
-            'process' => fake()->paragraphs(2, true),
+            'learning_objectives' => html_faker()->orderedList(rand(3, 7)),
+            'process' => html_faker()->paragraphs(4),
             'seat_time' => fake()->optional()->randomElement(['15 minutes', '30 minutes', '1 hour', '2 hours']),
-            'design_rationale' => fake()->paragraph(3),
+            'design_rationale' => html_faker()->paragraphs(3),
             'demo_url' => fake()->optional()->url(),
             'sort_order' => fake()->numberBetween(0, 20),
             'is_published' => fake()->boolean(80),
             'featured' => fake()->boolean(25),
-            'reflection' => fake()->optional()->paragraph(2),
+            'reflection' => html_faker()->paragraphs(2),
         ];
     }
 
@@ -93,7 +94,7 @@ class ProjectFactory extends Factory
 
         while (count($documents) < $count) {
             $documents[] = fake()->boolean(30)
-                ? UploadedFile::fake()->image(fake()->unique()->slug(2).'.png', 800, 600)
+                ? UploadedFile::fake()->image(fake()->unique()->slug(2) . '.png', 800, 600)
                 : $this->fakeDocument();
         }
 
@@ -105,7 +106,7 @@ class ProjectFactory extends Factory
         $extension = fake()->randomKey(self::DOCUMENT_TYPES);
 
         return UploadedFile::fake()->create(
-            fake()->unique()->slug(2).'.'.$extension,
+            fake()->unique()->slug(2) . '.' . $extension,
             random_int(20, 500),
             self::DOCUMENT_TYPES[$extension],
         );

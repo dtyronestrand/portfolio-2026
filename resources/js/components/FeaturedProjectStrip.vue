@@ -46,9 +46,10 @@
                         Challenge
                     </dt>
                     <dd
+                        v-html="project.challenge"
                         class="line-clamp-3 text-[15px] leading-6 text-(--text-muted)"
                     >
-                        {{ project.challenge }}
+                       
                     </dd>
                 </div>
                 <div
@@ -61,9 +62,10 @@
                         Solution
                     </dt>
                     <dd
+                        v-html="project.solution"
                         class="line-clamp-3 text-[15px] leading-6 text-(--text-muted)"
                     >
-                        {{ project.solution }}
+                   
                     </dd>
                 </div>
             </dl>

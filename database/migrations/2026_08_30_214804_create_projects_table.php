@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('challenge');
             $table->text('solution');
             $table->string('modality');
-            $table->json('learning_objectives');
+            $table->text('learning_objectives');
             $table->text('process');
             $table->string('seat_time')->nullable();
             $table->text('design_rationale');
