@@ -20,7 +20,7 @@ class Project extends Model implements HasMedia
     protected function casts(): array
     {
         return [
-            'learning_objectives' => 'array',
+
             'is_published' => 'boolean',
             'featured' => 'boolean',
             'sort_order' => 'integer',

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
@@ -17,11 +18,11 @@ Route::get('/skills', [SkillController::class, 'index'])->name('skills');
 Route::get('/contact', function () {
     return inertia('Contact');
 })->name('contact');
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'Dashboard')->name('dashboard');
-});
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 Route::get('/work/{project}', [ProjectController::class, 'show'])->name('work.show');
-Route::prefix('admin')->group(function () {
+
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::redirect('/', '/dashboard', 301);
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/work', [ProjectController::class, 'admin'])->name('admin.work');

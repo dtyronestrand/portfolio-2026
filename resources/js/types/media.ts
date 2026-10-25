@@ -1,0 +1,21 @@
+export type Media = {
+    collection_name: string;
+    conversions_disk: string;
+    created_at: string;
+    custom_properties: string[];
+    disk: string;
+    file_name: string;
+    generated_conversions: object;
+    id: number;
+    manipulations: string[];
+    mime_type: string;
+    model_id: number;
+    model_type: string;
+    name: string;
+    order_column: number | null;
+    original_url: string;
+    preview_url: string;
+    size: number;
+    updated_at: string;
+    uuid: string | null;
+};

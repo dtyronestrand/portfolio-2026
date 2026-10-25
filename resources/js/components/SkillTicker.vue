@@ -45,7 +45,7 @@ const tickerItems = ref([...props.skills]);
 
 <style scoped>
 .marquee {
-    animation: marquee 25s linear infinite;
+    animation: marquee 35s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
     .marquee {

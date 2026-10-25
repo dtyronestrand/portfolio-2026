@@ -1,7 +1,7 @@
 <template>
     <form
         @submit.prevent="handleSubmit"
-        class="flex max-w-180 min-w-0 flex-[1_1_300px] flex-col gap-6 rounded-lg border border-(--border-card) bg-(--surface-container-low) p-6"
+        class="flex max-w-180 min-w-0 flex-[1_1_300px] flex-col gap-6 self-center rounded-lg border border-(--border-card) bg-(--surface-container-low) p-6"
     >
         <div class="flex flex-col gap-1">
             <span class="text-xs tracking-wider text-(--text-muted) uppercase"
@@ -112,69 +112,27 @@
         <section class="flex flex-col gap-4">
             <div class="flex flex-col gap-2">
                 <Label for="challenge">Challenge</Label>
-                <Textarea
-                    rows="4"
-                    autoresize
-                    id="challenge"
-                    v-model="form.challenge"
-                    :class="textareaClass"
-                    placeholder="Describe the problem being solved..."
-                ></Textarea>
+                <TiptapEditor v-model="form.challenge" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="solution">Solution</Label>
-                <Textarea
-                    rows="4"
-                    autoresize
-                    id="solution"
-                    v-model="form.solution"
-                    :class="textareaClass"
-                    placeholder="Describe the product or solution..."
-                ></Textarea>
+                <TiptapEditor v-model="form.solution" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="learning_objectives">Learning Objectives</Label>
-                <Textarea
-                    rows="4"
-                    autoresize
-                    id="learning_objectives"
-                    v-model="learningObjectives"
-                    :class="textareaClass"
-                    placeholder="One objective per line"
-                ></Textarea>
+                <TiptapEditor v-model="form.learning_objectives" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="process">Process</Label>
-                <Textarea
-                    rows="4"
-                    autoresize
-                    id="process"
-                    v-model="form.process"
-                    :class="textareaClass"
-                    placeholder="How the project was designed and built..."
-                ></Textarea>
+                <TiptapEditor v-model="form.process" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="design_rationale">Design Rationale</Label>
-                <Textarea
-                    rows="4"
-                    autoresize
-                    id="design_rationale"
-                    v-model="form.design_rationale"
-                    :class="textareaClass"
-                    placeholder="Why the design choices were made..."
-                ></Textarea>
+                <TiptapEditor v-model="form.design_rationale" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="reflection">Reflection</Label>
-                <Textarea
-                    rows="4"
-                    autoresize
-                    id="reflection"
-                    v-model="form.reflection"
-                    :class="textareaClass"
-                    placeholder="What you learned or would do differently..."
-                ></Textarea>
+                <TiptapEditor v-model="form.reflection" />
             </div>
             <div class="flex flex-col gap-2">
                 <Label for="tags">Tags</Label>
@@ -295,7 +253,7 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
 import Message from 'primevue/message';
-import Textarea from 'primevue/textarea';
+import TiptapEditor from './TiptapEditor.vue';
 import { ref } from 'vue';
 import MediaUpload from '@/components/MediaUpload.vue';
 import Button from '@/components/ui/button/Button.vue';
@@ -309,9 +267,6 @@ interface Props {
         name: string;
     }[];
 }
-
-const textareaClass =
-    'w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50';
 
 // Edited as one objective per line, sent to the server as an array.
 const learningObjectives = ref('');
@@ -328,7 +283,7 @@ const form = useForm<{
     challenge: string;
     solution: string;
     modality: string;
-    learning_objectives: string[];
+    learning_objectives: string;
     process: string;
     seat_time: string;
     design_rationale: string;
@@ -354,7 +309,7 @@ const form = useForm<{
     challenge: '',
     solution: '',
     modality: '',
-    learning_objectives: [],
+    learning_objectives: '',
     process: '',
     seat_time: '',
     design_rationale: '',
