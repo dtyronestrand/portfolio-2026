@@ -89,6 +89,7 @@ const rightNavItems: NavItem[] = [
                                 class="mr-2 h-9 w-9"
                             >
                                 <Menu class="h-5 w-5" />
+                                <span class="sr-only">Toggle menu</span>
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="left" class="w-[300px] p-6">
@@ -194,6 +195,7 @@ const rightNavItems: NavItem[] = [
                             variant="ghost"
                             size="icon"
                             class="group h-9 w-9 cursor-pointer"
+                            aria-label="Search"
                         >
                             <Search
                                 class="size-5 opacity-80 group-hover:opacity-100"
@@ -245,6 +247,7 @@ const rightNavItems: NavItem[] = [
                                 size="icon"
                                 class="relative size-10 w-auto rounded-full p-1 focus-within:ring-2 focus-within:ring-primary"
                             >
+                                <span class="sr-only">Toggle user menu</span>
                                 <Avatar
                                     class="size-8 overflow-hidden rounded-full"
                                 >
