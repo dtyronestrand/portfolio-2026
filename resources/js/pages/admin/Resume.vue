@@ -1,4 +1,5 @@
 <template>
+    <h1>Resume</h1>
     <Tabs default-value="resume" class="w-full">
         <TabsList>
             <TabsTrigger value="resume">Resume</TabsTrigger>

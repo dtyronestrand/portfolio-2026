@@ -21,10 +21,10 @@ const props = defineProps<Props>();
 <template>
     <Head title="Deverick Strand Instructional Designer" />
     <main
-        class="mx-auto flex w-full max-w-[1280px] flex-col px-4 pt-16 pb-14 sm:px-10 sm:pt-21"
+        class="mx-auto flex w-full max-w-7xl flex-col px-4 pt-16 pb-14 sm:px-10 sm:pt-21"
     >
         <div
-            class="flex items-center gap-2.5 font-mono text-xs font-medium tracking-[0.05em] text-primary uppercase"
+            class="flex items-center gap-2.5 font-mono text-xs font-medium tracking-wider text-primary uppercase"
         >
             <span
                 class="blink inline-block h-1.75 w-1.75 rounded-full bg-secondary"

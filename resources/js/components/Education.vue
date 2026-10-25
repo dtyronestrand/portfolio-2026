@@ -2,7 +2,7 @@
     <section data-screen-label="Education" class="flex flex-col gap-6">
         <div class="flex flex-wrap items-end gap-9">
             <div class="min-w-260px flex-1">
-                <h1 class="ds-headline-lg m-[0 0 6px]">Education</h1>
+                <h2 class=" m-[0 0 6px]">Education</h2>
                 <p
                     class="text-md text-wrap-pretty m-0 max-w-[56ch] leading-3.5 text-(--text-muted)"
                 ></p>

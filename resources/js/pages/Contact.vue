@@ -1,8 +1,9 @@
 <template>
+    <Head title="Contact Deverick Strand" />
     <h1>Reach Out</h1>
     <div class="m-4 flex justify-center">
         <Form
-            class="rounded-lg bg-(--surface-container) p-6"
+            class="rounded-lg border border-(--border) bg-(--surface-container-lowest) p-6"
             method="post"
             action="/contact"
         >
@@ -65,6 +66,6 @@
 import Input from '@/components/ui/input/Input.vue';
 import Textarea from '@/components/ui/textarea/Textarea.vue';
 import Button from '@/components/ui/button/Button.vue';
-import { Form } from '@inertiajs/vue3';
+import { Form, Head } from '@inertiajs/vue3';
 </script>
 <style scoped></style>
